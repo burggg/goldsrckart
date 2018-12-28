@@ -1,0 +1,12 @@
+﻿  ammo.cpp
+  hud.cpp
+  train.cpp
+  pm_debug.c
+  pm_math.c
+  pm_shared.c
+     Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
+  Generating code
+  Finished generating code
+  hl_cdll.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\client.dll
+          1 file(s) copied.
+          1 file(s) copied.
