@@ -1,9 +1,4 @@
-﻿  ammo.cpp
-  hud.cpp
-  train.cpp
-  pm_debug.c
-  pm_math.c
-  pm_shared.c
+﻿  in_camera.cpp
      Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
   Generating code
   Finished generating code

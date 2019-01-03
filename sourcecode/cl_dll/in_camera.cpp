@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2002, Valve LLC, All rights reserved. ============
+//========= Copyright ï¿½ 1996-2002, Valve LLC, All rights reserved. ============
 //
 // Purpose: 
 //
@@ -434,11 +434,6 @@ void CAM_ToThirdPerson(void)
 	vec3_t viewangles;
 
 #if !defined( _DEBUG )
-	if ( gEngfuncs.GetMaxClients() > 1 )
-	{
-		// no thirdperson in multiplayer.
-		return;
-	}
 #endif
 
 	gEngfuncs.GetViewAngles( (float *)viewangles );
@@ -489,12 +484,12 @@ void CAM_Init( void )
 	gEngfuncs.pfnAddCommand( "-camdistance", CAM_EndDistance );
 	gEngfuncs.pfnAddCommand( "snapto", CAM_ToggleSnapto );
 
-	cam_command				= gEngfuncs.pfnRegisterVariable ( "cam_command", "0", 0 );	 // tells camera to go to thirdperson
+	cam_command				= gEngfuncs.pfnRegisterVariable ( "cam_command", "1", 0 );	 // tells camera to go to thirdperson
 	cam_snapto				= gEngfuncs.pfnRegisterVariable ( "cam_snapto", "0", 0 );	 // snap to thirdperson view
-	cam_idealyaw			= gEngfuncs.pfnRegisterVariable ( "cam_idealyaw", "90", 0 );	 // thirdperson yaw
+	cam_idealyaw			= gEngfuncs.pfnRegisterVariable ( "cam_idealyaw", "0", 0 );	 // thirdperson yaw
 	cam_idealpitch			= gEngfuncs.pfnRegisterVariable ( "cam_idealpitch", "0", 0 );	 // thirperson pitch
 	cam_idealdist			= gEngfuncs.pfnRegisterVariable ( "cam_idealdist", "64", 0 );	 // thirdperson distance
-	cam_contain				= gEngfuncs.pfnRegisterVariable ( "cam_contain", "0", 0 );	// contain camera to world
+	cam_contain				= gEngfuncs.pfnRegisterVariable ( "cam_contain", "1", 0 );	// contain camera to world
 
 	c_maxpitch				= gEngfuncs.pfnRegisterVariable ( "c_maxpitch", "90.0", 0 );
 	c_minpitch				= gEngfuncs.pfnRegisterVariable ( "c_minpitch", "0.0", 0 );
@@ -517,7 +512,7 @@ void CAM_ClearStates( void )
 	cam_in.state = 0;
 	cam_out.state = 0;
 
-	cam_thirdperson = 0;
+	cam_thirdperson = 1;	//thirdperson by default
 	cam_command->value = 0;
 	cam_mousemove=0;
 
