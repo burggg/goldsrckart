@@ -59,6 +59,8 @@ cvar_t	*c_minyaw;
 cvar_t	*c_maxdistance;
 cvar_t	*c_mindistance;
 
+extern float camYaw;
+
 // pitch, yaw, dist
 vec3_t cam_ofs;
 
@@ -371,14 +373,14 @@ void CL_DLLEXPORT CAM_Think( void )
 
 	if( cam_snapto->value )
 	{
-		camAngles[ YAW ] = cam_idealyaw->value + viewangles[ YAW ];
+		camAngles[YAW] = cam_idealyaw->value + camYaw; //+ viewangles[ YAW ];
 		camAngles[ PITCH ] = cam_idealpitch->value + viewangles[ PITCH ];
 		camAngles[ 2 ] = cam_idealdist->value;
 	}
 	else
 	{
-		if( camAngles[ YAW ] - viewangles[ YAW ] != cam_idealyaw->value )
-			camAngles[ YAW ] = MoveToward( camAngles[ YAW ], cam_idealyaw->value + viewangles[ YAW ], CAM_ANGLE_SPEED );
+		if( camAngles[ YAW ] - camYaw != cam_idealyaw->value )
+			camAngles[ YAW ] = MoveToward( camAngles[ YAW ], cam_idealyaw->value + camYaw, CAM_ANGLE_SPEED );
 
 		if( camAngles[ PITCH ] - viewangles[ PITCH ] != cam_idealpitch->value )
 			camAngles[ PITCH ] = MoveToward( camAngles[ PITCH ], cam_idealpitch->value + viewangles[ PITCH ], CAM_ANGLE_SPEED );

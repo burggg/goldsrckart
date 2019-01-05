@@ -149,7 +149,7 @@ copy "$(TargetDir)\$(TargetName).pdb" "C:\Program Files (x86)\Steam\steamapps\co
     <ClCompile Include="..\..\cl_dll\hud_spectator.cpp" />
     <ClCompile Include="..\..\cl_dll\hud_update.cpp" />
     <ClCompile Include="..\..\cl_dll\input.cpp" />
-    <ClCompile Include="..\..\cl_dll\inputw32.cpp" />
+    <ClCompile Include="..\..\cl_dll\input32.cpp" />
     <ClCompile Include="..\..\cl_dll\interpolation.cpp" />
     <ClCompile Include="..\..\cl_dll\in_camera.cpp" />
     <ClCompile Include="..\..\cl_dll\menu.cpp" />
