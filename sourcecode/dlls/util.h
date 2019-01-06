@@ -411,13 +411,13 @@ extern DLL_GLOBAL int			g_Language;
 #define PUSH_BLOCK_ONLY_X	1
 #define PUSH_BLOCK_ONLY_Y	2
 
-#define VEC_HULL_MIN		Vector(-16, -16, -36)
-#define VEC_HULL_MAX		Vector( 16,  16,  36)
+#define VEC_HULL_MIN		Vector(-30, -39, -20)
+#define VEC_HULL_MAX		Vector( 30,  39,  20)
 #define VEC_HUMAN_HULL_MIN	Vector( -16, -16, 0 )
 #define VEC_HUMAN_HULL_MAX	Vector( 16, 16, 72 )
 #define VEC_HUMAN_HULL_DUCK	Vector( 16, 16, 36 )
 
-#define VEC_VIEW			Vector( 0, 0, 28 )
+#define VEC_VIEW			Vector( 0, 0, 5 )
 
 #define VEC_DUCK_HULL_MIN	Vector(-16, -16, -18 )
 #define VEC_DUCK_HULL_MAX	Vector( 16,  16,  18)

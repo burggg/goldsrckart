@@ -81,8 +81,8 @@ typedef struct hull_s
 #define MAX_CLIMB_SPEED		200
 #define STUCK_MOVEUP		1
 #define STUCK_MOVEDOWN		-1
-#define VEC_HULL_MIN		-36
-#define VEC_HULL_MAX		36
+#define VEC_HULL_MIN		-20
+#define VEC_HULL_MAX		20
 #define VEC_VIEW			28
 #define	STOP_EPSILON		0.1
 

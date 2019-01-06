@@ -1611,7 +1611,7 @@ enum squeak_e {
 	SQUEAK_THROW
 };
 
-#define VEC_HULL_MIN		Vector(-16, -16, -36)
+#define VEC_HULL_MIN		Vector(-30, -39, -20)
 #define VEC_DUCK_HULL_MIN	Vector(-16, -16, -18 )
 
 void EV_SnarkFire( event_args_t *args )

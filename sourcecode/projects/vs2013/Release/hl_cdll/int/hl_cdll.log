@@ -1,4 +1,5 @@
-﻿  StudioModelRenderer.cpp
+﻿  ev_hldm.cpp
+  pm_shared.c
      Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
   Generating code
   Finished generating code
