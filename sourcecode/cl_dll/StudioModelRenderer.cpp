@@ -1362,7 +1362,7 @@ void CStudioModelRenderer::StudioEstimateGait( entity_state_t *pplayer )
 	{
 		VectorSubtract( m_pCurrentEntity->origin, m_pPlayerInfo->prevgaitorigin, est_velocity );
 		VectorCopy( m_pCurrentEntity->origin, m_pPlayerInfo->prevgaitorigin );
-		m_flGaitMovement = Length( est_velocity );
+		//m_flGaitMovement = Length( est_velocity );
 		if (dt <= 0 || m_flGaitMovement / dt < 5)
 		{
 			m_flGaitMovement = 0;
@@ -1372,8 +1372,8 @@ void CStudioModelRenderer::StudioEstimateGait( entity_state_t *pplayer )
 	}
 	else
 	{
-		VectorCopy( pplayer->velocity, est_velocity );
-		m_flGaitMovement = Length( est_velocity ) * dt;
+		//VectorCopy( pplayer->velocity, est_velocity );
+		//m_flGaitMovement = Length( est_velocity ) * dt;
 	}
 
 	if (est_velocity[1] == 0 && est_velocity[0] == 0)
@@ -1491,11 +1491,11 @@ void CStudioModelRenderer::StudioProcessGait( entity_state_t *pplayer )
 	// calc gait frame
 	if (pseqdesc->linearmovement[0] > 0)
 	{
-		m_pPlayerInfo->gaitframe += (m_flGaitMovement / pseqdesc->linearmovement[0]) * pseqdesc->numframes;
+		//m_pPlayerInfo->gaitframe += (m_flGaitMovement / pseqdesc->linearmovement[0]) * pseqdesc->numframes;
 	}
 	else
 	{
-		m_pPlayerInfo->gaitframe += pseqdesc->fps * dt;
+		//m_pPlayerInfo->gaitframe += pseqdesc->fps * dt;
 	}
 
 	// do modulo

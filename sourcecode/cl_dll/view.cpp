@@ -165,7 +165,7 @@ float V_CalcBob ( struct ref_params_s *pparams )
 {
 	static	double	bobtime;
 	static float	bob;
-	float	cycle;
+	//float	cycle;
 	static float	lasttime;
 	vec3_t	vel;
 	
@@ -178,7 +178,7 @@ float V_CalcBob ( struct ref_params_s *pparams )
 	}
 
 	lasttime = pparams->time;
-
+	/*
 	bobtime += pparams->frametime;
 	cycle = bobtime - (int)( bobtime / cl_bobcycle->value ) * cl_bobcycle->value;
 	cycle /= cl_bobcycle->value;
@@ -201,6 +201,7 @@ float V_CalcBob ( struct ref_params_s *pparams )
 	bob = bob * 0.3 + bob * 0.7 * sin(cycle);
 	bob = min( bob, 4 );
 	bob = max( bob, -7 );
+	*/
 	return bob;
 	
 }
@@ -492,7 +493,7 @@ void V_CalcNormalRefdef ( struct ref_params_s *pparams )
 	cl_entity_t		*ent, *view;
 	int				i;
 	vec3_t			angles;
-	float			bob, waterOffset;
+	float			waterOffset;
 	static viewinterp_t		ViewInterp;
 
 	static float oldz = 0;
@@ -522,7 +523,7 @@ void V_CalcNormalRefdef ( struct ref_params_s *pparams )
 
 	// refresh position
 	VectorCopy ( pparams->simorg, pparams->vieworg );
-	pparams->vieworg[2] += ( bob );
+	//pparams->vieworg[2] += ( bob );
 	VectorAdd( pparams->vieworg, pparams->viewheight, pparams->vieworg );
 
 	VectorCopy ( pparams->cl_viewangles, pparams->viewangles );
@@ -653,9 +654,9 @@ void V_CalcNormalRefdef ( struct ref_params_s *pparams )
 
 	for ( i = 0; i < 3; i++ )
 	{
-		view->origin[ i ] += bob * 0.4 * pparams->forward[ i ];
+		//view->origin[ i ] += bob * 0.4 * pparams->forward[ i ];
 	}
-	view->origin[2] += bob;
+	//view->origin[2] += bob;
 
 	// throw in a little tilt.
 	//view->angles[YAW]   -= bob * 0.5;

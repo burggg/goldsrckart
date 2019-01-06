@@ -65,7 +65,7 @@ void LinkUserMessages( void );
  */
 void set_suicide_frame(entvars_t* pev)
 {       
-	if (!FStrEq(STRING(pev->model), "models/player.mdl"))
+	if (!FStrEq(STRING(pev->model), "models/basekart.mdl"))
 		return; // allready gibbed
 
 //	pev->frame		= $deatha11;
@@ -890,7 +890,7 @@ void ClientPrecache( void )
 	PRECACHE_SOUND("player/pl_pain6.wav");
 	PRECACHE_SOUND("player/pl_pain7.wav");
 
-	PRECACHE_MODEL("models/player.mdl");
+	PRECACHE_MODEL("models/basekart.mdl");
 
 	// hud sounds
 

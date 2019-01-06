@@ -2899,7 +2899,7 @@ void CBasePlayer::Spawn( void )
 	g_pGameRules->SetDefaultPlayerTeam( this );
 	g_pGameRules->GetPlayerSpawnSpot( this );
 
-    SET_MODEL(ENT(pev), "models/player.mdl");
+    SET_MODEL(ENT(pev), "models/basekart.mdl");
     g_ulModelIndexPlayer = pev->modelindex;
 	pev->sequence		= LookupActivity( ACT_IDLE );
 
@@ -4700,8 +4700,8 @@ LINK_ENTITY_TO_CLASS( monster_hevsuit_dead, CDeadHEV );
 //=========================================================
 void CDeadHEV :: Spawn( void )
 {
-	PRECACHE_MODEL("models/player.mdl");
-	SET_MODEL(ENT(pev), "models/player.mdl");
+	PRECACHE_MODEL("models/basekart.mdl");
+	SET_MODEL(ENT(pev), "models/basekart.mdl");
 
 	pev->effects		= 0;
 	pev->yaw_speed		= 8;

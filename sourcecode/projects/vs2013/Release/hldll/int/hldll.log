@@ -1,4 +1,5 @@
-﻿  pm_shared.c
+﻿  genericmonster.cpp
+  nodes.cpp
      Creating library Release\hldll\hl.lib and object Release\hldll\hl.exp
   Generating code
   Finished generating code
