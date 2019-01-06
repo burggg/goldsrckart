@@ -1,0 +1,305 @@
+hlcsg v3.4 VL34 (Aug 17 2015)
+Zoner's Half-Life Compilation Tools -- Custom Build
+Based on code modifications by Sean 'Zoner' Cavanaugh
+Based on Valve's version, modified with permission.
+Submit detailed bug reports to (vluzacn@163.com)
+-----  BEGIN  hlcsg -----
+Command line: "C:/Program Files/J.A.C.K/halflife/VHLT/hlcsg.exe" "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\maps\entrance final" 
+Arguments: "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\maps\entrance final" -low -wadautodetect 
+Entering C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\maps\entrance final.map
+
+Current hlcsg Settings
+Name                 |  Setting  |  Default
+---------------------|-----------|-------------------------
+threads               [       4 ] [  Varies ]
+verbose               [     off ] [     off ]
+log                   [      on ] [      on ]
+reset logfile         [      on ] [      on ]
+developer             [       0 ] [       0 ]
+chart                 [     off ] [     off ]
+estimate              [     off ] [     off ]
+max texture memory    [ 33554432 ] [ 33554432 ]
+max lighting memory   [ 50331648 ] [ 50331648 ]
+priority              [     Low ] [  Normal ]
+
+noclip                [     off ] [     off ]
+null texture stripping[      on ] [      on ]
+clipnode economy mode [     off ] [     off ]
+clip hull type        [  simple ] [  simple ]
+onlyents              [     off ] [     off ]
+wadtextures           [      on ] [      on ]
+skyclip               [      on ] [      on ]
+hullfile              [    None ] [    None ]
+wad configuration file[    None ] [    None ]
+wad.cfg group name    [    None ] [    None ]
+nullfile              [    None ] [    None ]
+nullify trigger       [      on ] [      on ]
+min surface area      [   0.000 ] [   0.000 ]
+brush union threshold [   0.000 ] [   0.000 ]
+map scaling           [    None ] [    None ]
+light name optimize   [      on ] [      on ]
+convert game_text     [      on ] [      on ]
+
+Using mapfile wad configuration
+Wadfiles not in use by the map will be excluded
+Wadinclude list :
+[zhlt.wad]
+
+CreateBrush:
+ (0.08 seconds)
+CSGBrush:
+ (0.47 seconds)
+
+added 23 additional animating textures.
+Using Wadfile: \Program Files (x86)\Steam\steamapps\common\Half-Life\valve\halflife.wad
+ - Contains 112 used textures, 100.00 percent of map (3116 textures in wad)
+
+Wad files required to run the map: "halflife.wad;"
+Texture usage is at 1.02 mb (of 32.00 mb MAX)
+1 redundant named lights optimized.
+0.91 seconds elapsed
+
+-----   END   hlcsg -----
+
+
+
+hlbsp v3.4 VL34 (Aug 17 2015)
+Zoner's Half-Life Compilation Tools -- Custom Build
+Based on code modifications by Sean 'Zoner' Cavanaugh
+Based on Valve's version, modified with permission.
+Submit detailed bug reports to (vluzacn@163.com)
+-----  BEGIN  hlbsp -----
+Command line: "C:/Program Files/J.A.C.K/halflife/VHLT/hlbsp.exe" "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\maps\entrance final" 
+Arguments: "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\maps\entrance final" -low -chart 
+
+Current hlbsp Settings
+Name               |  Setting  |  Default
+-------------------|-----------|-------------------------
+threads             [       4 ] [  Varies ]
+verbose             [     off ] [     off ]
+log                 [      on ] [      on ]
+developer           [       0 ] [       0 ]
+chart               [      on ] [     off ]
+estimate            [     off ] [     off ]
+max texture memory  [ 33554432 ] [ 33554432 ]
+priority            [     Low ] [  Normal ]
+
+noclip              [     off ] [     off ]
+nofill              [     off ] [     off ]
+noinsidefill        [     off ] [     off ]
+noopt               [     off ] [     off ]
+no clipnode merging [     off ] [     off ]
+null tex. stripping [      on ] [      on ]
+notjunc             [     off ] [     off ]
+nobrink             [     off ] [     off ]
+subdivide size      [     240 ] [     240 ] (Min 64) (Max 512)
+max node size       [    1024 ] [    1024 ] (Min 64) (Max 65536)
+remove hull 2       [     off ] [     off ]
+
+
+SolidBSP [hull 0] 500...639 (0.15 seconds)
+BSP generation successful, writing portal file 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\maps\entrance final.prt'
+SolidBSP [hull 1] 500...517 (0.07 seconds)
+SolidBSP [hull 2] 498 (0.07 seconds)
+SolidBSP [hull 3] 500...546 (0.07 seconds)
+Reduced 2124 clipnodes to 2030
+Reduced 577 texinfos to 399
+Reduced 112 texdatas to 105 (4932 bytes to 4624)
+Reduced 3844 planes to 1220
+FixBrinks:
+Increased 2030 clipnodes to 2074.
+
+Object names  Objects/Maxobjs  Memory / Maxmem  Fullness
+------------  ---------------  ---------------  --------
+models             29/512         1856/32768    ( 5.7%)
+planes           1220/32768      24400/655360   ( 3.7%)
+vertexes         2268/65535      27216/786420   ( 3.5%)
+nodes             752/32767      18048/786408   ( 2.3%)
+texinfos          399/32767      15960/1310680  ( 1.2%)
+faces            1553/65535      31060/1310700  ( 2.4%)
+* worldfaces     1239/32768          0/0        ( 3.8%)
+clipnodes        2074/32767      16592/262136   ( 6.3%)
+leaves            496/32760      13888/917280   ( 1.5%)
+* worldleaves     249/8192           0/0        ( 3.0%)
+marksurfaces     1998/65535       3996/131070   ( 3.0%)
+surfedges        7498/512000     29992/2048000  ( 1.5%)
+edges            3756/256000     15024/1024000  ( 1.5%)
+texdata          [variable]       4624/33554432 ( 0.0%)
+lightdata        [variable]          0/50331648 ( 0.0%)
+visdata          [variable]          0/8388608  ( 0.0%)
+entdata          [variable]      10745/2097152  ( 0.5%)
+* AllocBlock        4/64             0/0        ( 6.3%)
+105 textures referenced
+=== Total BSP file data space used: 213401 bytes ===
+Wad files required to run the map: "halflife.wad;"
+1.11 seconds elapsed
+
+-----   END   hlbsp -----
+
+
+
+hlvis v3.4 VL34 (Aug 17 2015)
+Zoner's Half-Life Compilation Tools -- Custom Build
+Based on code modifications by Sean 'Zoner' Cavanaugh
+Based on Valve's version, modified with permission.
+Submit detailed bug reports to (vluzacn@163.com)
+-----  BEGIN  hlvis -----
+Command line: "C:/Program Files/J.A.C.K/halflife/VHLT/hlvis.exe" -fast "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\maps\entrance final" 
+Arguments: -fast "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\maps\entrance final" -low 
+ 249 portalleafs
+ 804 numportals
+
+-= Current hlvis Settings =-
+Name               |  Setting  |  Default
+-------------------|-----------|-------------------------
+threads             [       4 ] [  Varies ]
+verbose             [     off ] [     off ]
+log                 [      on ] [      on ]
+developer           [       0 ] [       0 ]
+chart               [     off ] [     off ]
+estimate            [     off ] [     off ]
+max texture memory  [ 33554432 ] [ 33554432 ]
+max vis distance    [       0 ] [       0 ]
+priority            [     Low ] [  Normal ]
+
+fast vis            [      on ] [     off ]
+full vis            [     off ] [     off ]
+
+
+BasePortalVis:
+ (0.03 seconds)
+average leafs visible: 162
+g_visdatasize:6768  compressed from 7968
+0.13 seconds elapsed
+
+-----   END   hlvis -----
+
+
+
+hlrad v3.4 VL34 (Aug 17 2015)
+Zoner's Half-Life Compilation Tools -- Custom Build
+Based on code modifications by Sean 'Zoner' Cavanaugh
+Based on Valve's version, modified with permission.
+Submit detailed bug reports to (vluzacn@163.com)
+-----  BEGIN  hlrad -----
+Command line: "C:/Program Files/J.A.C.K/halflife/VHLT/hlrad.exe" "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\maps\entrance final" 
+Arguments: "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\maps\entrance final" -low 
+
+-= Current hlrad Settings =-
+Name                | Setting             | Default
+--------------------|---------------------|-------------------------
+threads              [                 4 ] [            Varies ]
+verbose              [               off ] [               off ]
+log                  [                on ] [                on ]
+developer            [                 0 ] [                 0 ]
+chart                [               off ] [               off ]
+estimate             [               off ] [               off ]
+max texture memory   [          33554432 ] [          33554432 ]
+max lighting memory  [          50331648 ] [          50331648 ]
+priority             [               Low ] [            Normal ]
+
+fast rad             [               off ] [               off ]
+vismatrix algorithm  [            Sparse ] [            Sparse ]
+oversampling (-extra)[               off ] [               off ]
+bounces              [                 8 ] [                 8 ]
+ambient light        [ 0.000 0.000 0.000 ] [ 0.000 0.000 0.000 ]
+light limit threshold[           188.000 ] [           188.000 ]
+circus mode          [               off ] [               off ]
+
+smoothing threshold  [            50.000 ] [            50.000 ]
+smoothing threshold 2[         no change ] [         no change ]
+direct threshold     [            10.000 ] [            10.000 ]
+direct light scale   [             1.000 ] [             1.000 ]
+coring threshold     [             0.010 ] [             0.010 ]
+patch interpolation  [                on ] [                on ]
+
+texscale             [                on ] [                on ]
+patch subdividing    [                on ] [                on ]
+chop value           [            64.000 ] [            64.000 ]
+texchop value        [            32.000 ] [            32.000 ]
+
+global fade          [             1.000 ] [             1.000 ]
+global texlight gap  [             0.000 ] [             0.000 ]
+global light scale   [ 2.000 2.000 2.000 ] [ 2.000 2.000 2.000 ]
+global gamma         [ 0.550 0.550 0.550 ] [ 0.550 0.550 0.550 ]
+global light scale   [             2.000 ] [             2.000 ]
+global sky diffusion [             1.000 ] [             1.000 ]
+
+spread angles        [                on ] [                on ]
+opaque entities      [                on ] [                on ]
+sky lighting fix     [                on ] [                on ]
+incremental          [               off ] [               off ]
+dump                 [               off ] [               off ]
+
+colour jitter        [       0.0 0.0 0.0 ] [       0.0 0.0 0.0 ]
+monochromatic jitter [       0.0 0.0 0.0 ] [       0.0 0.0 0.0 ]
+
+custom shadows with bounce light
+                     [               off ] [               off ]
+rgb transfers        [               off ] [               off ]
+minimum final light  [                 0 ] [                 0 ]
+size of transfer     [         1 (16bit) ] [         1 (16bit) ]
+size of rgbtransfer  [         2 (32bit) ] [         2 (32bit) ]
+soft sky             [                on ] [                on ]
+translucent depth    [             2.000 ] [             2.000 ]
+block opaque         [                on ] [                on ]
+ignore textures      [               off ] [               off ]
+reflectivity gamma   [             1.760 ] [             1.760 ]
+reflectivity scale   [             0.700 ] [             0.700 ]
+blur size            [             1.500 ] [             1.500 ]
+no emitter range     [               off ] [               off ]
+wall bleeding fix    [                on ] [                on ]
+
+
+Load Textures:
+Using Wadfile: C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\maps\entrance final.wa_
+105 textures referenced
+Reading texlights from 'C:\Program Files\J.A.C.K\halflife\VHLT\lights.rad'
+0 opaque models
+0 opaque faces
+1553 faces
+Create Patches : 3873 base patches
+43038 square feet [6197558.00 square inches]
+161 direct lights and 22 fast direct lights
+2 light styles
+
+FindFacePositions:
+ (0.39 seconds)
+BuildFacelights:
+ (2.01 seconds)
+BuildVisLeafs:
+ (0.56 seconds)
+visibility matrix   :   0.7 megs
+MakeScales:
+ (0.63 seconds)
+Transfer Lists :     1371713 :     1.37M transfers
+       Indices :     1036084 :  1011.80k bytes
+          Data :     2754733 :     2.63M bytes
+Bounce 1 GatherLight:
+ (0.03 seconds)
+Bounce 2 GatherLight:
+ (0.04 seconds)
+Bounce 3 GatherLight:
+ (0.05 seconds)
+Bounce 4 GatherLight:
+ (0.04 seconds)
+Bounce 5 GatherLight:
+ (0.04 seconds)
+Bounce 6 GatherLight:
+ (0.04 seconds)
+Bounce 7 GatherLight:
+ (0.04 seconds)
+Bounce 8 GatherLight:
+ (0.04 seconds)
+CreateTriangulations:
+ (0.03 seconds)
+AddPatchLights:
+ (0.61 seconds)
+FinalLightFace:
+ (0.01 seconds)
+5.04 seconds elapsed
+
+-----   END   hlrad -----
+
+
+

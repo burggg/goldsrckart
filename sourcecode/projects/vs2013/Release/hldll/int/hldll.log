@@ -2,6 +2,7 @@
   agrunt.cpp
   airtank.cpp
   animating.cpp
+  animation.cpp
   apache.cpp
   barnacle.cpp
   barney.cpp
@@ -17,8 +18,8 @@
   crossbow.cpp
   crowbar.cpp
   defaultai.cpp
-  doors.cpp
   Compiling...
+  doors.cpp
   effects.cpp
   egon.cpp
   explode.cpp
@@ -38,8 +39,8 @@
   h_cine.cpp
   h_cycler.cpp
   h_export.cpp
-  handgrenade.cpp
   Compiling...
+  handgrenade.cpp
   hassassin.cpp
   headcrab.cpp
   healthkit.cpp
@@ -59,12 +60,13 @@
   mortar.cpp
   mp5.cpp
   multiplay_gamerules.cpp
-  nihilanth.cpp
   Compiling...
+  nihilanth.cpp
   nodes.cpp
   observer.cpp
   osprey.cpp
   pathcorner.cpp
+  plane.cpp
   plats.cpp
   player.cpp
   python.cpp
@@ -79,9 +81,9 @@
   singleplay_gamerules.cpp
   skill.cpp
   sound.cpp
+  Compiling...
   soundent.cpp
   spectator.cpp
-  Compiling...
   squadmonster.cpp
   squeakgrenade.cpp
   subs.cpp
@@ -98,6 +100,7 @@
   xen.cpp
   zombie.cpp
   voice_gamemgr.cpp
+  pm_debug.c
   pm_shared.c
      Creating library Release\hldll\hl.lib and object Release\hldll\hl.exp
   Generating code

@@ -37,7 +37,11 @@
 #include "pm_shared.h"
 #include "hltv.h"
 
-// #define DUCKFIX
+#define STUNNED_NO		0	//No stun
+#define STUNNED_BEGIN	1	//Wait for the countdown to end at the beginning
+#define STUNNED_HIT		2	//Stunned from a hit
+int stunned;		//disables movement - for beginning of rounds or if the player gets stunned
+float stunTime;
 
 extern DLL_GLOBAL ULONG		g_ulModelIndexPlayer;
 extern DLL_GLOBAL BOOL		g_fGameOver;
@@ -81,7 +85,6 @@ TYPEDESCRIPTION	CBasePlayer::m_playerSaveData[] =
 	DEFINE_ARRAY( CBasePlayer, m_rgItems, FIELD_INTEGER, MAX_ITEMS ),
 	DEFINE_FIELD( CBasePlayer, m_afPhysicsFlags, FIELD_INTEGER ),
 
-	DEFINE_FIELD( CBasePlayer, m_flTimeStepSound, FIELD_TIME ),
 	DEFINE_FIELD( CBasePlayer, m_flTimeWeaponIdle, FIELD_TIME ),
 	DEFINE_FIELD( CBasePlayer, m_flSwimTime, FIELD_TIME ),
 	DEFINE_FIELD( CBasePlayer, m_flDuckTime, FIELD_TIME ),
@@ -379,16 +382,6 @@ int CBasePlayer :: TakeHealth( float flHealth, int bitsDamageType )
 
 }
 
-Vector CBasePlayer :: GetGunPosition( )
-{
-//	UTIL_MakeVectors(pev->v_angle);
-//	m_HackedGunPos = pev->view_ofs;
-	Vector origin;
-	
-	origin = pev->origin + pev->view_ofs;
-
-	return origin;
-}
 
 //=========================================================
 // TraceAttack
@@ -442,6 +435,7 @@ void CBasePlayer :: TraceAttack( entvars_t *pevAttacker, float flDamage, Vector 
 
 int CBasePlayer :: TakeDamage( entvars_t *pevInflictor, entvars_t *pevAttacker, float flDamage, int bitsDamageType )
 {
+	/*
 	// have suit diagnose the problem - ie: report damage type
 	int bitsDamage = bitsDamageType;
 	int ffound = TRUE;
@@ -668,8 +662,21 @@ int CBasePlayer :: TakeDamage( entvars_t *pevInflictor, entvars_t *pevAttacker, 
 			else
 				SetSuitUpdate("!HEV_HLTH1", FALSE, SUIT_NEXT_IN_10MIN);	// health dropping
 		}
+	*/
+	stun(STUNNED_HIT, flDamage);
+	return 1;
+}
 
-	return fTookDamage;
+void CBasePlayer::stun(int type, float duration){
+	stunned = type;
+	stunTime = gpGlobals->time + duration;
+	SetThink(&CBasePlayer::stunThink);
+	pev->nextthink = gpGlobals->time + duration;
+}
+
+void CBasePlayer::stunThink(){
+	SetThink(NULL);
+	stunned = STUNNED_NO;
 }
 
 //=========================================================
@@ -1491,116 +1498,15 @@ void CBasePlayer::StartObserver( Vector vecPosition, Vector vecViewAngle )
 
 void CBasePlayer::PlayerUse ( void )
 {
-	if ( IsObserver() )
-		return;
-
-	// Was use pressed or released?
-	if ( ! ((pev->button | m_afButtonPressed | m_afButtonReleased) & IN_USE) )
-		return;
-
-	// Hit Use on a train?
-	if ( m_afButtonPressed & IN_USE )
-	{
-		if ( m_pTank != NULL )
-		{
-			// Stop controlling the tank
-			// TODO: Send HUD Update
-			m_pTank->Use( this, this, USE_OFF, 0 );
-			m_pTank = NULL;
-			return;
-		}
-		else
-		{
-			if ( m_afPhysicsFlags & PFLAG_ONTRAIN )
-			{
-				m_afPhysicsFlags &= ~PFLAG_ONTRAIN;
-				m_iTrain = TRAIN_NEW|TRAIN_OFF;
-				return;
-			}
-			else
-			{	// Start controlling the train!
-				CBaseEntity *pTrain = CBaseEntity::Instance( pev->groundentity );
-
-				if ( pTrain && !(pev->button & IN_JUMP) && FBitSet(pev->flags, FL_ONGROUND) && (pTrain->ObjectCaps() & FCAP_DIRECTIONAL_USE) && pTrain->OnControls(pev) )
-				{
-					m_afPhysicsFlags |= PFLAG_ONTRAIN;
-					m_iTrain = TrainSpeed(pTrain->pev->speed, pTrain->pev->impulse);
-					m_iTrain |= TRAIN_NEW;
-					EMIT_SOUND( ENT(pev), CHAN_ITEM, "plats/train_use1.wav", 0.8, ATTN_NORM);
-					return;
-				}
-			}
-		}
-	}
-
-	CBaseEntity *pObject = NULL;
-	CBaseEntity *pClosest = NULL;
-	Vector		vecLOS;
-	float flMaxDot = VIEW_FIELD_NARROW;
-	float flDot;
-
-	UTIL_MakeVectors ( pev->v_angle );// so we know which way we are facing
-	
-	while ((pObject = UTIL_FindEntityInSphere( pObject, pev->origin, PLAYER_SEARCH_RADIUS )) != NULL)
-	{
-
-		if (pObject->ObjectCaps() & (FCAP_IMPULSE_USE | FCAP_CONTINUOUS_USE | FCAP_ONOFF_USE))
-		{
-			// !!!PERFORMANCE- should this check be done on a per case basis AFTER we've determined that
-			// this object is actually usable? This dot is being done for every object within PLAYER_SEARCH_RADIUS
-			// when player hits the use key. How many objects can be in that area, anyway? (sjb)
-			vecLOS = (VecBModelOrigin( pObject->pev ) - (pev->origin + pev->view_ofs));
-			
-			// This essentially moves the origin of the target to the corner nearest the player to test to see 
-			// if it's "hull" is in the view cone
-			vecLOS = UTIL_ClampVectorToBox( vecLOS, pObject->pev->size * 0.5 );
-			
-			flDot = DotProduct (vecLOS , gpGlobals->v_forward);
-			if (flDot > flMaxDot )
-			{// only if the item is in front of the user
-				pClosest = pObject;
-				flMaxDot = flDot;
-//				ALERT( at_console, "%s : %f\n", STRING( pObject->pev->classname ), flDot );
-			}
-//			ALERT( at_console, "%s : %f\n", STRING( pObject->pev->classname ), flDot );
-		}
-	}
-	pObject = pClosest;
-
-	// Found an object
-	if (pObject )
-	{
-		//!!!UNDONE: traceline here to prevent USEing buttons through walls			
-		int caps = pObject->ObjectCaps();
-
-		if ( m_afButtonPressed & IN_USE )
-			EMIT_SOUND( ENT(pev), CHAN_ITEM, "common/wpn_select.wav", 0.4, ATTN_NORM);
-
-		if ( ( (pev->button & IN_USE) && (caps & FCAP_CONTINUOUS_USE) ) ||
-			 ( (m_afButtonPressed & IN_USE) && (caps & (FCAP_IMPULSE_USE|FCAP_ONOFF_USE)) ) )
-		{
-			if ( caps & FCAP_CONTINUOUS_USE )
-				m_afPhysicsFlags |= PFLAG_USING;
-
-			pObject->Use( this, this, USE_SET, 1 );
-		}
-		// UNDONE: Send different USE codes for ON/OFF.  Cache last ONOFF_USE object to send 'off' if you turn away
-		else if ( (m_afButtonReleased & IN_USE) && (pObject->ObjectCaps() & FCAP_ONOFF_USE) )	// BUGBUG This is an "off" use
-		{
-			pObject->Use( this, this, USE_SET, 0 );
-		}
-	}
-	else
-	{
-		if ( m_afButtonPressed & IN_USE )
-			EMIT_SOUND( ENT(pev), CHAN_ITEM, "common/wpn_denyselect.wav", 0.4, ATTN_NORM);
-	}
+	return;
+	//TODO: put code for using powerups here
 }
 
 
 
 void CBasePlayer::Jump()
 {
+	/*
 	Vector		vecWallCheckDir;// direction we're tracing a line to find a wall when walljumping
 	Vector		vecAdjustedVelocity;
 	Vector		vecSpot;
@@ -1646,6 +1552,7 @@ void CBasePlayer::Jump()
 	{
 		pev->velocity = pev->velocity + pev->basevelocity;
 	}
+	*/
 }
 
 
@@ -1668,16 +1575,6 @@ void FixPlayerCrouchStuck( edict_t *pPlayer )
 	}
 }
 
-void CBasePlayer::Duck( )
-{
-	if (pev->button & IN_DUCK) 
-	{
-		if ( m_IdealActivity != ACT_LEAP )
-		{
-			SetAnimation( PLAYER_WALK );
-		}
-	}
-}
 
 //
 // ID's player as such.
@@ -1964,9 +1861,7 @@ void CBasePlayer::PreThink(void)
 	}
 
 
-	// If trying to duck, already ducked, or in the process of ducking
-	if ((pev->button & IN_DUCK) || FBitSet(pev->flags,FL_DUCKING) || (m_afPhysicsFlags & PFLAG_DUCKING) )
-		Duck();
+	
 
 	if ( !FBitSet ( pev->flags, FL_ONGROUND ) )
 	{
@@ -1978,9 +1873,15 @@ void CBasePlayer::PreThink(void)
 	// Clear out ladder pointer
 	m_hEnemy = NULL;
 
-	if ( m_afPhysicsFlags & PFLAG_ONBARNACLE )
+	if ( m_afPhysicsFlags & PFLAG_ONBARNACLE)
 	{
 		pev->velocity = g_vecZero;
+	}
+
+	if (stunned == STUNNED_HIT){
+		pev->velocity = g_vecZero;
+		pev->angles = g_vecZero;
+		pev->v_angle.z = 0;
 	}
 }
 /* Time based Damage works as follows: 
@@ -2588,6 +2489,7 @@ void CBasePlayer::PostThink()
 // do weapon stuff
 	ItemPostFrame( );
 
+// REMOVED - what cart racer has fall damage? -Sockman
 // check to see if player landed hard enough to make a sound
 // falling farther than half of the maximum safe distance, but not as far a max safe distance will
 // play a bootscrape sound, and no damage will be inflicted. Fallling a distance shorter than half
@@ -2596,34 +2498,6 @@ void CBasePlayer::PostThink()
 
 	if ( (FBitSet(pev->flags, FL_ONGROUND)) && (pev->health > 0) && m_flFallVelocity >= PLAYER_FALL_PUNCH_THRESHHOLD )
 	{
-		// ALERT ( at_console, "%f\n", m_flFallVelocity );
-
-		if (pev->watertype == CONTENT_WATER)
-		{
-			// Did he hit the world or a non-moving entity?
-			// BUG - this happens all the time in water, especially when 
-			// BUG - water has current force
-			// if ( !pev->groundentity || VARS(pev->groundentity)->velocity.z == 0 )
-				// EMIT_SOUND(ENT(pev), CHAN_BODY, "player/pl_wade1.wav", 1, ATTN_NORM);
-		}
-		else if ( m_flFallVelocity > PLAYER_MAX_SAFE_FALL_SPEED )
-		{// after this point, we start doing damage
-			
-			float flFallDamage = g_pGameRules->FlPlayerFallDamage( this );
-
-			if ( flFallDamage > pev->health )
-			{//splat
-				// note: play on item channel because we play footstep landing on body channel
-				EMIT_SOUND(ENT(pev), CHAN_ITEM, "common/bodysplat.wav", 1, ATTN_NORM);
-			}
-
-			if ( flFallDamage > 0 )
-			{
-				TakeDamage(VARS(eoNullEntity), VARS(eoNullEntity), flFallDamage, DMG_FALL ); 
-				pev->punchangle.x = 0;
-			}
-		}
-
 		if ( IsAlive() )
 		{
 			SetAnimation( PLAYER_WALK );
@@ -2634,7 +2508,7 @@ void CBasePlayer::PostThink()
 	{		
 		if (m_flFallVelocity > 64 && !g_pGameRules->IsMultiplayer())
 		{
-			CSoundEnt::InsertSound ( bits_SOUND_PLAYER, pev->origin, m_flFallVelocity, 0.2 );
+			//CSoundEnt::InsertSound ( bits_SOUND_PLAYER, pev->origin, m_flFallVelocity, 0.2 );
 			// ALERT( at_console, "fall %f\n", m_flFallVelocity );
 		}
 		m_flFallVelocity = 0;
@@ -2871,6 +2745,8 @@ void CBasePlayer::Spawn( void )
 	m_afPhysicsFlags	= 0;
 	m_fLongJump			= FALSE;// no longjump module. 
 
+	stunned				= STUNNED_NO;
+
 	g_engfuncs.pfnSetPhysicsKeyValue( edict(), "slj", "0" );
 	g_engfuncs.pfnSetPhysicsKeyValue( edict(), "hl", "1" );
 
@@ -2882,7 +2758,6 @@ void CBasePlayer::Spawn( void )
 	m_flgeigerDelay = gpGlobals->time + 2.0;	// wait a few seconds until user-defined message registrations
 												// are recieved by all clients
 	
-	m_flTimeStepSound	= 0;
 	m_iStepLeft = 0;
 	m_flFieldOfView		= 0.5;// some monsters use this to determine whether or not the player is looking at them.
 
@@ -4664,6 +4539,8 @@ BOOL CBasePlayer :: SwitchWeapon( CBasePlayerItem *pWeapon )
 
 	return TRUE;
 }
+
+
 
 //=========================================================
 // Dead HEV suit prop

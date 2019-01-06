@@ -252,7 +252,6 @@ void CBasePlayer::StartDeathCam( void ) { }
 void CBasePlayer::StartObserver( Vector vecPosition, Vector vecViewAngle ) { }
 void CBasePlayer::PlayerUse ( void ) { }
 void CBasePlayer::Jump() { }
-void CBasePlayer::Duck( ) { }
 int  CBasePlayer::Classify ( void ) { return 0; }
 void CBasePlayer::PreThink(void) { }
 void CBasePlayer::CheckTimeBasedDamage()  { }
@@ -296,7 +295,6 @@ int CBasePlayer :: GetCustomDecalFrames( void ) { return -1; }
 void CBasePlayer::DropPlayerItem ( char *pszItemName ) { }
 BOOL CBasePlayer::HasPlayerItem( CBasePlayerItem *pCheckItem ) { return FALSE; }
 BOOL CBasePlayer :: SwitchWeapon( CBasePlayerItem *pWeapon )  { return FALSE; }
-Vector CBasePlayer :: GetGunPosition( void ) { return g_vecZero; }
 const char *CBasePlayer::TeamID( void ) { return ""; }
 int CBasePlayer :: GiveAmmo( int iCount, char *szName, int iMax ) { return 0; }
 void CBasePlayer::AddPoints( int score, BOOL bAllowNegativeScore ) { } 

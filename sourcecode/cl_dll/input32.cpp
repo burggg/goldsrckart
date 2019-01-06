@@ -538,9 +538,6 @@ void IN_MouseMove ( float frametime, usercmd_t *cmd)
 		// Apply custom mouse scaling/acceleration
 		IN_ScaleMouse( &mouse_x, &mouse_y );
 
-		if (!camYaw){
-			camYaw = 1;
-		}
 
 		// add mouse X/Y movement to cmd
 		if ( (in_strafe.state & 1) || (lookstrafe->value && (in_mlook.state & 1) ))

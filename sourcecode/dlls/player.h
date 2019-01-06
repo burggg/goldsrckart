@@ -132,7 +132,6 @@ public:
 
 
 // these are time-sensitive things that we keep track of
-	float				m_flTimeStepSound;	// when the last stepping sound was made
 	float				m_flTimeWeaponIdle; // when to play another weapon idle animation.
 	float				m_flSwimTime;		// how long player has been underwater
 	float				m_flDuckTime;		// how long we've been ducking
@@ -203,18 +202,13 @@ public:
 
 //	virtual void Think( void );
 	virtual void Jump( void );
-	virtual void Duck( void );
 	virtual void PreThink( void );
 	virtual void PostThink( void );
-	virtual Vector GetGunPosition( void );
 	virtual int TakeHealth( float flHealth, int bitsDamageType );
 	virtual void TraceAttack( entvars_t *pevAttacker, float flDamage, Vector vecDir, TraceResult *ptr, int bitsDamageType);
 	virtual int TakeDamage( entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage, int bitsDamageType);
 	virtual void	Killed( entvars_t *pevAttacker, int iGib );
 	virtual Vector BodyTarget( const Vector &posSrc ) { return Center( ) + pev->view_ofs * RANDOM_FLOAT( 0.5, 1.1 ); };		// position to shoot at
-	virtual void StartSneaking( void ) { m_tSneaking = gpGlobals->time - 1; }
-	virtual void StopSneaking( void ) { m_tSneaking = gpGlobals->time + 30; }
-	virtual BOOL IsSneaking( void ) { return m_tSneaking <= gpGlobals->time; }
 	virtual BOOL IsAlive( void ) { return (pev->deadflag == DEAD_NO) && pev->health > 0; }
 	virtual BOOL ShouldFadeOnDeath( void ) { return FALSE; }
 	virtual	BOOL IsPlayer( void ) { return TRUE; }			// Spectators should return FALSE for this, they aren't "players" as far as game logic is concerned
@@ -322,7 +316,9 @@ public:
 	char m_SbarString1[ SBAR_STRING_SIZE ];
 	
 	float m_flNextChatTime;
-	
+
+	void stun(int type, float duration);
+	void stunThink();
 };
 
 #define AUTOAIM_2DEGREES  0.0348994967025

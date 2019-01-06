@@ -150,7 +150,6 @@ public:
 
 // Sounds
 	virtual BOOL PlayTextureSounds( void ) { return TRUE; }
-	virtual BOOL PlayFootstepSounds( CBasePlayer *pl, float fvol ) { return TRUE; }
 
 // Monsters
 	virtual BOOL FAllowMonsters( void ) = 0;//are monsters allowed
@@ -341,7 +340,6 @@ public:
 	virtual int PlayerRelationship( CBaseEntity *pPlayer, CBaseEntity *pTarget );
 
 	virtual BOOL PlayTextureSounds( void ) { return FALSE; }
-	virtual BOOL PlayFootstepSounds( CBasePlayer *pl, float fvol );
 
 // Monsters
 	virtual BOOL FAllowMonsters( void );

@@ -1691,7 +1691,6 @@ void UpdateClientData ( const edict_t *ent, int sendweapons, struct clientdata_s
 	cd->punchangle		= pev->punchangle;
 
 	cd->bInDuck			= pev->bInDuck;
-	cd->flTimeStepSound = pev->flTimeStepSound;
 	cd->flDuckTime		= pev->flDuckTime;
 	cd->flSwimTime		= pev->flSwimTime;
 	cd->waterjumptime	= pev->teleport_time;
