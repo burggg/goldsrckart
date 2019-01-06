@@ -445,8 +445,8 @@ void IN_MoverightUp(void)
 }
 void IN_SpeedDown(void) {KeyDown(&in_speed);}
 void IN_SpeedUp(void) {KeyUp(&in_speed);}
-void IN_StrafeDown(void) {KeyDown(&in_strafe);}
-void IN_StrafeUp(void) {KeyUp(&in_strafe);}
+//void IN_StrafeDown(void) {KeyDown(&in_strafe);}
+//void IN_StrafeUp(void) {KeyUp(&in_strafe);}
 
 // needs capture by hud/vgui also
 extern void __CmdFunc_InputPlayerSpecial(void);
@@ -617,18 +617,12 @@ void CL_AdjustAngles ( float frametime, float *viewangles )
 		speed = frametime;
 	}
 
-	if (!(in_strafe.state & 1))
-	{
-		viewangles[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_moveright);
-		viewangles[YAW] += speed*cl_yawspeed->value*CL_KeyState(&in_moveleft);
-		viewangles[YAW] = anglemod(viewangles[YAW]);
-	}
-	if (!(in_strafe.state & 1))
-	{
-		camYaw -= speed*cl_yawspeed->value*CL_KeyState(&in_right);
-		camYaw += speed*cl_yawspeed->value*CL_KeyState(&in_left);
-		camYaw = anglemod(camYaw);
-	}
+	viewangles[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_moveright);
+	viewangles[YAW] += speed*cl_yawspeed->value*CL_KeyState(&in_moveleft);
+	viewangles[YAW] = anglemod(viewangles[YAW]);
+	camYaw -= speed*cl_yawspeed->value*CL_KeyState(&in_right);
+	camYaw += speed*cl_yawspeed->value*CL_KeyState(&in_left);
+	camYaw = anglemod(camYaw);
 
 	if (in_klook.state & 1)
 	{
@@ -709,11 +703,12 @@ void CL_DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int ac
 		}	
 
 		// adjust for speed key
+		/*
 		if ( in_speed.state & 1 )
 		{
 			cmd->forwardmove *= cl_movespeedkey->value;
 			cmd->upmove *= cl_movespeedkey->value;
-		}
+		}*/
 
 		// clip to maxspeed
 		spd = gEngfuncs.GetClientMaxspeed();
@@ -952,8 +947,6 @@ void InitInput (void)
 	gEngfuncs.pfnAddCommand ("-lookup", IN_LookupUp);
 	gEngfuncs.pfnAddCommand ("+lookdown", IN_LookdownDown);
 	gEngfuncs.pfnAddCommand ("-lookdown", IN_LookdownUp);
-	gEngfuncs.pfnAddCommand ("+strafe", IN_StrafeDown);
-	gEngfuncs.pfnAddCommand ("-strafe", IN_StrafeUp);
 	gEngfuncs.pfnAddCommand ("+moveleft", IN_MoveleftDown);
 	gEngfuncs.pfnAddCommand ("-moveleft", IN_MoveleftUp);
 	gEngfuncs.pfnAddCommand ("+moveright", IN_MoverightDown);

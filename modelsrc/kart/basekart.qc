@@ -1,0 +1,6 @@
+$modelname "basekart.mdl"
+$cd ".\"
+$cdtexture ".\textures"
+$body studio "polygon1"
+$body wheels "wheel"
+$sequence idle "polygon1"

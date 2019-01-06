@@ -518,7 +518,7 @@ void V_CalcNormalRefdef ( struct ref_params_s *pparams )
 
 	// transform the view offset by the model's matrix to get the offset from
 	// model origin for the view
-	bob = V_CalcBob ( pparams );
+	//bob = V_CalcBob ( pparams );
 
 	// refresh position
 	VectorCopy ( pparams->simorg, pparams->vieworg );
@@ -658,9 +658,9 @@ void V_CalcNormalRefdef ( struct ref_params_s *pparams )
 	view->origin[2] += bob;
 
 	// throw in a little tilt.
-	view->angles[YAW]   -= bob * 0.5;
-	view->angles[ROLL]  -= bob * 1;
-	view->angles[PITCH] -= bob * 0.3;
+	//view->angles[YAW]   -= bob * 0.5;
+	//view->angles[ROLL]  -= bob * 1;
+	//view->angles[PITCH] -= bob * 0.3;
 
 	// pushing the view origin down off of the same X/Z plane as the ent's origin will give the
 	// gun a very nice 'shifting' effect when the player looks up/down. If there is a problem

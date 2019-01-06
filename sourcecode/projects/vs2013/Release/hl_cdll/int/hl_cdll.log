@@ -1,6 +1,8 @@
-﻿  input.cpp
+﻿  view.cpp
+  pm_shared.c
      Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
   Generating code
+c:\program files (x86)\steam\steamapps\common\half-life\goldsrckart\sourcecode\cl_dll\view.cpp(525): warning C4700: uninitialized local variable 'bob' used
   Finished generating code
   hl_cdll.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\client.dll
           1 file(s) copied.
