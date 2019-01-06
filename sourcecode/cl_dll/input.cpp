@@ -43,6 +43,8 @@ int CL_ButtonBits( int );
 // xxx need client dll function to get and clear impuse
 extern cvar_t *in_joystick;
 
+extern float camYaw;
+
 int	in_impulse	= 0;
 int	in_cancel	= 0;
 
@@ -617,10 +619,17 @@ void CL_AdjustAngles ( float frametime, float *viewangles )
 
 	if (!(in_strafe.state & 1))
 	{
-		viewangles[YAW] -= speed*cl_yawspeed->value*CL_KeyState (&in_right);
-		viewangles[YAW] += speed*cl_yawspeed->value*CL_KeyState (&in_left);
+		viewangles[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_moveright);
+		viewangles[YAW] += speed*cl_yawspeed->value*CL_KeyState(&in_moveleft);
 		viewangles[YAW] = anglemod(viewangles[YAW]);
 	}
+	if (!(in_strafe.state & 1))
+	{
+		camYaw -= speed*cl_yawspeed->value*CL_KeyState(&in_right);
+		camYaw += speed*cl_yawspeed->value*CL_KeyState(&in_left);
+		camYaw = anglemod(camYaw);
+	}
+
 	if (in_klook.state & 1)
 	{
 		V_StopPitchDrift ();
@@ -665,6 +674,8 @@ void CL_DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int ac
 	vec3_t viewangles;
 	static vec3_t oldangles;
 
+	gEngfuncs.GetViewAngles((float *)viewangles);
+
 	if ( active && !Bench_Active() )
 	{
 		//memset( viewangles, 0, sizeof( vec3_t ) );
@@ -677,14 +688,16 @@ void CL_DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int ac
 		
 		gEngfuncs.SetViewAngles( (float *)viewangles );
 
+		/* Is this important? - Sockman
 		if ( in_strafe.state & 1 )
 		{
-			cmd->sidemove += cl_sidespeed->value * CL_KeyState (&in_right);
-			cmd->sidemove -= cl_sidespeed->value * CL_KeyState (&in_left);
+			viewangles[YAW] += cl_sidespeed->value * CL_KeyState(&in_right);
+			viewangles[YAW] -= cl_sidespeed->value * CL_KeyState (&in_left);
 		}
+		*/
 
-		cmd->sidemove += cl_sidespeed->value * CL_KeyState (&in_moveright);
-		cmd->sidemove -= cl_sidespeed->value * CL_KeyState (&in_moveleft);
+		//viewangles[YAW] += cl_sidespeed->value * CL_KeyState(&in_moveright);
+		//viewangles[YAW] -= cl_sidespeed->value * CL_KeyState(&in_moveleft);
 
 		cmd->upmove += cl_upspeed->value * CL_KeyState (&in_up);
 		cmd->upmove -= cl_upspeed->value * CL_KeyState (&in_down);
@@ -699,7 +712,6 @@ void CL_DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int ac
 		if ( in_speed.state & 1 )
 		{
 			cmd->forwardmove *= cl_movespeedkey->value;
-			cmd->sidemove *= cl_movespeedkey->value;
 			cmd->upmove *= cl_movespeedkey->value;
 		}
 
@@ -708,7 +720,7 @@ void CL_DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int ac
 		if ( spd != 0.0 )
 		{
 			// scale the 3 speeds so that the total velocity is not > cl.maxspeed
-			float fmov = sqrt( (cmd->forwardmove*cmd->forwardmove) + (cmd->sidemove*cmd->sidemove) + (cmd->upmove*cmd->upmove) );
+			float fmov = sqrt((cmd->forwardmove*cmd->forwardmove) + (cmd->sidemove * cmd->sidemove) + (cmd->upmove*cmd->upmove));
 
 			if ( fmov > spd )
 			{
@@ -750,7 +762,6 @@ void CL_DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int ac
 		}
 	}
 
-	gEngfuncs.GetViewAngles( (float *)viewangles );
 	// Set current view angles.
 
 	if ( g_iAlive )
