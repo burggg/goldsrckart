@@ -1,22 +1,3 @@
-﻿  hl_baseentity.cpp
-  hl_weapons.cpp
-  crossbow.cpp
-  crowbar.cpp
-  egon.cpp
-  gauss.cpp
-  handgrenade.cpp
-  hornetgun.cpp
-  mp5.cpp
-  python.cpp
-  rpg.cpp
-  satchel.cpp
-  shotgun.cpp
-  squeakgrenade.cpp
-  tripmine.cpp
-  hl_wpn_glock.cpp
-     Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
-  Generating code
-  Finished generating code
-  hl_cdll.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\client.dll
+﻿  hl_cdll.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\client.dll
           1 file(s) copied.
           1 file(s) copied.

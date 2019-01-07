@@ -35,19 +35,35 @@ void CCharacter::Spawn(void){
 		break;
 	case scientist:
 		SET_MODEL(ENT(pev), "models/scientist.mdl");
-		pev->sequence = 74;
+		baseSequence = 74;
+		pev->sequence = baseSequence;
 		break;
 	default:
 		break;
 	}
-	pev->frame = 0;
 	ResetSequenceInfo();
+	pev->frame = 0;
 
 	UTIL_SetOrigin(pev, pev->origin);
+	SetThink(&CCharacter::characterThink);
+	pev->nextthink = gpGlobals->time + 0.1;
 }
 
 
 void CCharacter::setPosition(CBasePlayer *m_pPlayer){
-	UTIL_SetOrigin(pev, m_pPlayer->pev->origin);
 	pev->angles = m_pPlayer->pev->angles;
+	pev->velocity = (m_pPlayer->pev->origin - pev->origin) * 100;			//Hack - removes jitter you get form setting the origin directly
+}
+
+void CCharacter::characterThink(void){
+	StudioFrameAdvance();
+	ALERT(at_console, "NOT DONE");
+	if (m_fSequenceFinished){
+		ALERT(at_console, "DONE\n");
+		pev->sequence = baseSequence;
+		ResetSequenceInfo();
+		pev->frame = 0;
+	}
+
+	pev->nextthink = gpGlobals->time + 0.1;
 }

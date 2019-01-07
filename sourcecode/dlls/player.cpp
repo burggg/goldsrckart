@@ -1892,7 +1892,6 @@ void CBasePlayer::PreThink(void)
 		pev->v_angle.z = 0;
 	}
 
-
 	pCharacter->setPosition(this);
 }
 /* Time based Damage works as follows: 
@@ -2608,6 +2607,10 @@ pt_end:
 
 	// Track button info so we can detect 'pressed' and 'released' buttons next frame
 	m_afButtonLast = pev->button;
+
+
+
+	pCharacter->setPosition(this);
 }
 
 
@@ -2734,13 +2737,6 @@ ReturnSpot:
 
 void CBasePlayer::Spawn( void )
 {
-	//TODO: make a character select
-	character			= scientist;
-	characterSave		= character;
-
-	pCharacter= GetClassPtr((CCharacter *)NULL);
-	pCharacter->Spawn();
-	pCharacter->setPosition(this);
 
 	pev->classname		= MAKE_STRING("player");
 	pev->health			= 100;
@@ -2832,6 +2828,15 @@ void CBasePlayer::Spawn( void )
 	m_flNextChatTime = gpGlobals->time;
 
 	g_pGameRules->PlayerSpawn( this );
+
+
+	//TODO: make a character select
+	character = scientist;
+	characterSave = character;
+
+	pCharacter = GetClassPtr((CCharacter *)NULL);
+	pCharacter->Spawn();
+	pCharacter->setPosition(this);
 }
 
 
