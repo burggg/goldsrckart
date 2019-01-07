@@ -126,8 +126,16 @@
     <ClInclude Include="..\..\pm_shared\pm_materials.h" />
     <ClInclude Include="..\..\pm_shared\pm_movevars.h" />
     <ClInclude Include="..\..\pm_shared\pm_shared.h" />
+    <ClInclude Include="..\..\dlls\characters.h">
+      <Filter>New</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\lib\public\game_controls.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="New">
+      <UniqueIdentifier>{bb7c92b4-579e-433d-9f62-d941d44168cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

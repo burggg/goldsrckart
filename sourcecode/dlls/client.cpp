@@ -890,7 +890,12 @@ void ClientPrecache( void )
 	PRECACHE_SOUND("player/pl_pain6.wav");
 	PRECACHE_SOUND("player/pl_pain7.wav");
 
+	//Kart models
 	PRECACHE_MODEL("models/basekart.mdl");
+
+	//Character Models
+	PRECACHE_MODEL("models/scientist.mdl");
+	PRECACHE_MODEL("models/player.mdl");
 
 	// hud sounds
 
