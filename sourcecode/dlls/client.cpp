@@ -207,8 +207,9 @@ void ClientPutInServer( edict_t *pEntity )
 	// Reset interpolation during first frame
 	pPlayer->pev->effects |= EF_NOINTERP;
 
-	pPlayer->pev->iuser1 = 0;	// disable any spec modes
+	pPlayer->pev->iuser1 = 0; // disable any spec modes
 	pPlayer->pev->iuser2 = 0; 
+
 }
 
 #include "voice_gamemgr.h"
@@ -890,12 +891,12 @@ void ClientPrecache( void )
 	PRECACHE_SOUND("player/pl_pain6.wav");
 	PRECACHE_SOUND("player/pl_pain7.wav");
 
-	//Kart models
+
+	//Carts
 	PRECACHE_MODEL("models/basekart.mdl");
 
-	//Character Models
+	//Characters
 	PRECACHE_MODEL("models/scientist.mdl");
-	PRECACHE_MODEL("models/player.mdl");
 
 	// hud sounds
 

@@ -1426,7 +1426,7 @@ int V_FindViewModelByWeaponModel(int weaponindex)
 		{ "models/p_satchel.mdl",		"models/v_satchel.mdl"		},
 		{ NULL, NULL } };
 
-	struct model_s * weaponModel = IEngineStudio.GetModelByIndex( weaponindex );
+	/*struct model_s * weaponModel = IEngineStudio.GetModelByIndex( weaponindex );
 
 	if ( weaponModel )
 	{
@@ -1445,6 +1445,7 @@ int V_FindViewModelByWeaponModel(int weaponindex)
 		return 0;
 	}
 	else
+	*/
 		return 0;
 
 }

@@ -125,7 +125,6 @@ copy "$(TargetDir)\$(TargetName).pdb" "C:\Program Files (x86)\Steam\steamapps\co
     <ClCompile Include="..\..\dlls\bullsquid.cpp" />
     <ClCompile Include="..\..\dlls\buttons.cpp" />
     <ClCompile Include="..\..\dlls\cbase.cpp" />
-    <ClCompile Include="..\..\dlls\characters.cpp" />
     <ClCompile Include="..\..\dlls\client.cpp" />
     <ClCompile Include="..\..\dlls\combat.cpp" />
     <ClCompile Include="..\..\dlls\controller.cpp" />
@@ -222,7 +221,6 @@ copy "$(TargetDir)\$(TargetName).pdb" "C:\Program Files (x86)\Steam\steamapps\co
     <ClInclude Include="..\..\dlls\basemonster.h" />
     <ClInclude Include="..\..\dlls\cbase.h" />
     <ClInclude Include="..\..\dlls\cdll_dll.h" />
-    <ClInclude Include="..\..\dlls\characters.h" />
     <ClInclude Include="..\..\dlls\client.h" />
     <ClInclude Include="..\..\dlls\decals.h" />
     <ClInclude Include="..\..\dlls\defaultai.h" />

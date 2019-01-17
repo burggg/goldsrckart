@@ -86,6 +86,8 @@ struct entity_state_s
 	qboolean	spectator;  
 	int         weaponmodel;
 	int			gaitsequence;
+
+
 	// If standing on conveyor, e.g.
 	vec3_t		basevelocity;   
 	// Use the crouched hull, or the regular player hull.
@@ -120,6 +122,7 @@ struct entity_state_s
 	vec3_t		vuser2;
 	vec3_t		vuser3;
 	vec3_t		vuser4;
+
 };
 
 #include "pm_info.h"

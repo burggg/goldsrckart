@@ -85,13 +85,6 @@ enum sbar_data
 
 #define CHAT_INTERVAL 1.0f
 
-
-enum characters{
-	gordon,
-	scientist
-};
-
-
 class CBasePlayer : public CBaseMonster
 {
 public:
@@ -326,8 +319,6 @@ public:
 
 	void stun(int type, float duration);
 	void stunThink();
-
-	int characterSave; //Hack - use this to save/restore
 };
 
 #define AUTOAIM_2DEGREES  0.0348994967025

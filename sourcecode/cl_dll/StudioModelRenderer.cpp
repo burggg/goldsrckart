@@ -1175,7 +1175,7 @@ int CStudioModelRenderer::StudioDrawModel( int flags )
 
 		// clear weapon, movement state
 		deadplayer.number = m_pCurrentEntity->curstate.renderamt;
-		deadplayer.weaponmodel = 0;
+		//deadplayer.weaponmodel = 0;
 		deadplayer.gaitsequence = 0;
 
 		deadplayer.movetype = MOVETYPE_NONE;
@@ -1850,6 +1850,8 @@ int CStudioModelRenderer::StudioDrawPlayer( int flags, entity_state_t *pplayer )
 
 			model_t *pweaponmodel = IEngineStudio.GetModelByIndex( pplayer->weaponmodel );
 
+
+
 #if defined _TFC
 			if ( pweaponmodel )
 			{
@@ -1921,6 +1923,7 @@ int CStudioModelRenderer::StudioDrawPlayer( int flags, entity_state_t *pplayer )
 #endif
 
 			StudioMergeBones( pweaponmodel );
+
 
 			IEngineStudio.StudioSetupLighting (&lighting);
 

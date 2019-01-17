@@ -357,7 +357,7 @@ BOOL CFuncTank :: StartControl( CBasePlayer *pController )
 	if ( m_pController->m_pActiveItem )
 	{
 		m_pController->m_pActiveItem->Holster();
-		m_pController->pev->weaponmodel = 0;
+		//m_pController->pev->weaponmodel = 0;
 		m_pController->pev->viewmodel = 0; 
 
 	}

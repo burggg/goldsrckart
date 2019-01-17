@@ -37,8 +37,6 @@
 #include "pm_shared.h"
 #include "hltv.h"
 
-#include "characters.h"
-
 #define STUNNED_NO		0	//No stun
 #define STUNNED_BEGIN	1	//Wait for the countdown to end at the beginning
 #define STUNNED_HIT		2	//Stunned from a hit
@@ -62,8 +60,6 @@ extern edict_t *EntSelectSpawnPoint( CBaseEntity *pPlayer );
 // the world node graph
 extern CGraph	WorldGraph;
 
-extern int character;
-
 #define TRAIN_ACTIVE	0x80 
 #define TRAIN_NEW		0xc0
 #define TRAIN_OFF		0x00
@@ -76,12 +72,9 @@ extern int character;
 #define	FLASH_DRAIN_TIME	 1.2 //100 units/3 minutes
 #define	FLASH_CHARGE_TIME	 0.2 // 100 units/20 seconds  (seconds per unit)
 
-CCharacter *pCharacter;
-
 // Global Savedata for player
 TYPEDESCRIPTION	CBasePlayer::m_playerSaveData[] = 
 {
-
 	DEFINE_FIELD( CBasePlayer, m_flFlashLightTime, FIELD_TIME ),
 	DEFINE_FIELD( CBasePlayer, m_iFlashBattery, FIELD_INTEGER ),
 
@@ -127,8 +120,7 @@ TYPEDESCRIPTION	CBasePlayer::m_playerSaveData[] =
 	DEFINE_FIELD( CBasePlayer, m_pTank, FIELD_EHANDLE ),
 	DEFINE_FIELD( CBasePlayer, m_iHideHUD, FIELD_INTEGER ),
 	DEFINE_FIELD( CBasePlayer, m_iFOV, FIELD_INTEGER ),
-
-	DEFINE_FIELD(CBasePlayer, characterSave, FIELD_INTEGER),
+	
 	//DEFINE_FIELD( CBasePlayer, m_fDeadTime, FIELD_FLOAT ), // only used in multiplayer games
 	//DEFINE_FIELD( CBasePlayer, m_fGameHUDInitialized, FIELD_INTEGER ), // only used in multiplayer games
 	//DEFINE_FIELD( CBasePlayer, m_flStopExtraSoundTime, FIELD_TIME ),
@@ -852,7 +844,7 @@ void CBasePlayer::RemoveAllItems( BOOL removeSuit )
 	m_pActiveItem = NULL;
 
 	pev->viewmodel		= 0;
-	pev->weaponmodel	= 0;
+	//pev->weaponmodel	= 0;
 	
 	if ( removeSuit )
 		pev->weapons = 0;
@@ -1891,8 +1883,6 @@ void CBasePlayer::PreThink(void)
 		pev->angles = g_vecZero;
 		pev->v_angle.z = 0;
 	}
-
-	pCharacter->setPosition(this);
 }
 /* Time based Damage works as follows: 
 	1) There are several types of timebased damage:
@@ -2607,10 +2597,6 @@ pt_end:
 
 	// Track button info so we can detect 'pressed' and 'released' buttons next frame
 	m_afButtonLast = pev->button;
-
-
-
-	pCharacter->setPosition(this);
 }
 
 
@@ -2737,7 +2723,6 @@ ReturnSpot:
 
 void CBasePlayer::Spawn( void )
 {
-
 	pev->classname		= MAKE_STRING("player");
 	pev->health			= 100;
 	pev->armorvalue		= 0;
@@ -2789,9 +2774,13 @@ void CBasePlayer::Spawn( void )
 	g_pGameRules->SetDefaultPlayerTeam( this );
 	g_pGameRules->GetPlayerSpawnSpot( this );
 
-    SET_MODEL(ENT(pev), "models/basekart.mdl");
+    SET_MODEL(ENT(pev), "models/scientist.mdl");
     g_ulModelIndexPlayer = pev->modelindex;
 	pev->sequence		= LookupActivity( ACT_IDLE );
+
+
+	PRECACHE_MODEL("models/basekart.mdl");
+	pev->weaponmodel = MAKE_STRING("models/basekart.mdl");	//TODO: make character select determine this
 
 	if ( FBitSet(pev->flags, FL_DUCKING) ) 
 		UTIL_SetSize(pev, VEC_DUCK_HULL_MIN, VEC_DUCK_HULL_MAX);
@@ -2828,15 +2817,6 @@ void CBasePlayer::Spawn( void )
 	m_flNextChatTime = gpGlobals->time;
 
 	g_pGameRules->PlayerSpawn( this );
-
-
-	//TODO: make a character select
-	character = scientist;
-	characterSave = character;
-
-	pCharacter = GetClassPtr((CCharacter *)NULL);
-	pCharacter->Spawn();
-	pCharacter->setPosition(this);
 }
 
 
@@ -2961,12 +2941,6 @@ int CBasePlayer::Restore( CRestore &restore )
 	//			Barring that, we clear it out here instead of using the incorrect restored time value.
 	m_flNextAttack = UTIL_WeaponTimeBase();
 #endif
-
-	character = characterSave;
-	pCharacter = GetClassPtr((CCharacter *)NULL);
-	pCharacter->Spawn();
-	pCharacter->setPosition(this);
-
 
 	return status;
 }
@@ -3658,7 +3632,7 @@ int CBasePlayer::RemovePlayerItem( CBasePlayerItem *pItem )
 		pItem->SetThink( NULL );
 		m_pActiveItem = NULL;
 		pev->viewmodel = 0;
-		pev->weaponmodel = 0;
+		//pev->weaponmodel = 0;
 	}
 	else if ( m_pLastItem == pItem )
 		m_pLastItem = NULL;
@@ -4607,8 +4581,8 @@ LINK_ENTITY_TO_CLASS( monster_hevsuit_dead, CDeadHEV );
 //=========================================================
 void CDeadHEV :: Spawn( void )
 {
-	PRECACHE_MODEL("models/player.mdl");
-	SET_MODEL(ENT(pev), "models/player.mdl");
+	PRECACHE_MODEL("models/basekart.mdl");
+	SET_MODEL(ENT(pev), "models/basekart.mdl");
 
 	pev->effects		= 0;
 	pev->yaw_speed		= 8;

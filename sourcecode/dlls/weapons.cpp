@@ -758,7 +758,7 @@ void CBasePlayerItem::Kill( void )
 void CBasePlayerItem::Holster( int skiplocal /* = 0 */ )
 { 
 	m_pPlayer->pev->viewmodel = 0; 
-	m_pPlayer->pev->weaponmodel = 0;
+	//m_pPlayer->pev->weaponmodel = 0;
 }
 
 void CBasePlayerItem::AttachToPlayer ( CBasePlayer *pPlayer )
@@ -994,7 +994,7 @@ BOOL CBasePlayerWeapon :: DefaultDeploy( char *szViewModel, char *szWeaponModel,
 
 	m_pPlayer->TabulateAmmo();
 	m_pPlayer->pev->viewmodel = MAKE_STRING(szViewModel);
-	m_pPlayer->pev->weaponmodel = MAKE_STRING(szWeaponModel);
+	//m_pPlayer->pev->weaponmodel = MAKE_STRING(szWeaponModel);
 	strcpy( m_pPlayer->m_szAnimExtention, szAnimExt );
 	SendWeaponAnim( iAnim, skiplocal, body );
 
@@ -1061,7 +1061,7 @@ void CBasePlayerWeapon::Holster( int skiplocal /* = 0 */ )
 { 
 	m_fInReload = FALSE; // cancel any reload in progress.
 	m_pPlayer->pev->viewmodel = 0; 
-	m_pPlayer->pev->weaponmodel = 0;
+	//m_pPlayer->pev->weaponmodel = 0;
 }
 
 void CBasePlayerAmmo::Spawn( void )
@@ -1183,7 +1183,7 @@ void CBasePlayerWeapon::RetireWeapon( void )
 {
 	// first, no viewmodel at all.
 	m_pPlayer->pev->viewmodel = iStringNull;
-	m_pPlayer->pev->weaponmodel = iStringNull;
+	//m_pPlayer->pev->weaponmodel = iStringNull;
 	//m_pPlayer->pev->viewmodelindex = NULL;
 
 	g_pGameRules->GetNextBestWeapon( m_pPlayer, this );
