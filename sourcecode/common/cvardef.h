@@ -34,4 +34,5 @@ typedef struct cvar_s
 	float	value;
 	struct cvar_s *next;
 } cvar_t;
+
 #endif

@@ -49,7 +49,6 @@ extern DLL_GLOBAL	BOOL	g_fDrawLines;
 int gEvilImpulse101;
 extern DLL_GLOBAL int		g_iSkillLevel, gDisplayTitle;
 
-
 BOOL gInitHUD = TRUE;
 
 extern void CopyToBodyQue(entvars_t* pev);
@@ -667,14 +666,25 @@ int CBasePlayer :: TakeDamage( entvars_t *pevInflictor, entvars_t *pevAttacker, 
 	return 1;
 }
 
+vec3_t old_angles;
 void CBasePlayer::stun(int type, float duration){
+	pev->iuser4 = 1;
+	//pev->fixangle = TRUE;
+	old_angles = pev->angles;
+
 	stunned = type;
-	stunTime = gpGlobals->time + duration;
+
 	SetThink(&CBasePlayer::stunThink);
-	pev->nextthink = gpGlobals->time + duration;
+
+	stunTime = gpGlobals->time + duration;
+	pev->nextthink = stunTime;
 }
 
 void CBasePlayer::stunThink(){
+	pev->iuser4 = 0;
+
+	//pev->fixangle = FALSE;
+
 	SetThink(NULL);
 	stunned = STUNNED_NO;
 }
@@ -1745,6 +1755,8 @@ void CBasePlayer::UpdateStatusBar()
 
 void CBasePlayer::PreThink(void)
 {
+
+
 	int buttonsChanged = (m_afButtonLast ^ pev->button);	// These buttons have changed this frame
 	
 	// Debounced button codes for pressed/released
@@ -1878,11 +1890,6 @@ void CBasePlayer::PreThink(void)
 		pev->velocity = g_vecZero;
 	}
 
-	if (stunned == STUNNED_HIT){
-		pev->velocity = g_vecZero;
-		pev->angles = g_vecZero;
-		pev->v_angle.z = 0;
-	}
 }
 /* Time based Damage works as follows: 
 	1) There are several types of timebased damage:
@@ -2466,6 +2473,12 @@ void CBasePlayer :: UpdatePlayerSound ( void )
 
 void CBasePlayer::PostThink()
 {
+
+	if (stunned == STUNNED_HIT){
+		old_angles.y += 180 * gpGlobals->frametime;	//spin around
+		pev->angles = old_angles;
+	}
+
 	if ( g_fGameOver )
 		goto pt_end;         // intermission or finale
 
@@ -2597,6 +2610,8 @@ pt_end:
 
 	// Track button info so we can detect 'pressed' and 'released' buttons next frame
 	m_afButtonLast = pev->button;
+
+	
 }
 
 

@@ -39,7 +39,6 @@
 #endif
 #endif
 
-
 static int pm_shared_initialized = 0;
 
 #pragma warning( disable : 4305 )
@@ -764,8 +763,14 @@ void PM_WalkMove ()
 	pmtrace_t trace;
 	
 	// Copy movement amounts
-	fmove = pmove->cmd.forwardmove;
-	smove = pmove->cmd.sidemove;
+	if (pmove->iuser4 == 0){
+		fmove = pmove->cmd.forwardmove;
+		smove = pmove->cmd.sidemove;
+	}
+	else{		//if the player is stunned, don't let the player move
+		fmove = 0;
+		smove = 0;
+	}
 	
 	// Zero out z components of movement vectors
 	pmove->forward[2] = 0;
@@ -2527,7 +2532,8 @@ void PM_CheckParamters( void )
 		// Set up view angles.
 		pmove->angles[ROLL]	=	PM_CalcRoll ( v_angle, pmove->velocity, pmove->movevars->rollangle, pmove->movevars->rollspeed )*4;
 		pmove->angles[PITCH] =	v_angle[PITCH];
-		pmove->angles[YAW]   =	v_angle[YAW];
+		pmove->angles[YAW] =	v_angle[YAW];
+
 	}
 	else
 	{
@@ -2719,6 +2725,7 @@ void PM_PlayerMove ( qboolean server )
 			PM_AddCorrectGravity();
 		}
 
+
 		// If we are leaping out of the water, just update the counters.
 		if ( pmove->waterjumptime )
 		{
@@ -2792,6 +2799,7 @@ void PM_PlayerMove ( qboolean server )
 			PM_CheckVelocity();
 
 			// Are we on ground now
+
 			if (pmove->onground != -1)
 			{
 				PM_WalkMove();
