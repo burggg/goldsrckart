@@ -896,7 +896,7 @@ void ClientPrecache( void )
 	PRECACHE_MODEL("models/basekart.mdl");
 
 	//Characters
-	PRECACHE_MODEL("models/scientist.mdl");
+	PRECACHE_MODEL("models/CharacterScientist.mdl");
 
 	// hud sounds
 
