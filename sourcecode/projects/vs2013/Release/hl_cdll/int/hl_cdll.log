@@ -1,4 +1,5 @@
-﻿     Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
+﻿  hl_baseentity.cpp
+     Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
   Generating code
   Finished generating code
   hl_cdll.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart-master\sourcecode\projects\vs2013\Release\hl_cdll\client.dll

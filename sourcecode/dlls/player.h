@@ -319,6 +319,13 @@ public:
 
 	void stun(int type, float duration);
 	void stunThink();
+
+	int stunned;		//disables movement - for beginning of rounds or if the player gets stunned
+	float stunTime;
+
+	//vars for new movement system
+	float anglesYaw;
+	float acceleration;
 };
 
 #define AUTOAIM_2DEGREES  0.0348994967025

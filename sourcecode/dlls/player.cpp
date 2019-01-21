@@ -40,8 +40,7 @@
 #define STUNNED_NO		0	//No stun
 #define STUNNED_BEGIN	1	//Wait for the countdown to end at the beginning
 #define STUNNED_HIT		2	//Stunned from a hit
-int stunned;		//disables movement - for beginning of rounds or if the player gets stunned
-float stunTime;
+
 
 extern DLL_GLOBAL ULONG		g_ulModelIndexPlayer;
 extern DLL_GLOBAL BOOL		g_fGameOver;
@@ -1755,7 +1754,27 @@ void CBasePlayer::UpdateStatusBar()
 
 void CBasePlayer::PreThink(void)
 {
+	//New turning code
+	if (m_afButtonLast & IN_MOVELEFT){
+		anglesYaw += 2 * gpGlobals->frametime;
+	}
 
+	if (m_afButtonLast & IN_MOVERIGHT){
+		anglesYaw -= 2 * gpGlobals->frametime;
+	}
+
+	if (m_afButtonLast & IN_FORWARD){
+		acceleration += 50 * gpGlobals->frametime;
+	}
+	else{
+		acceleration -= pev->friction * gpGlobals->frametime;
+	}
+
+	ALERT(at_console, "Before: %f ", anglesYaw);
+	pev->velocity.x = cos(anglesYaw) * acceleration;
+	pev->velocity.y = sin(anglesYaw) * acceleration;
+	
+	ALERT(at_console, "After: %f \n", anglesYaw);
 
 	int buttonsChanged = (m_afButtonLast ^ pev->button);	// These buttons have changed this frame
 	
@@ -2789,13 +2808,11 @@ void CBasePlayer::Spawn( void )
 	g_pGameRules->SetDefaultPlayerTeam( this );
 	g_pGameRules->GetPlayerSpawnSpot( this );
 
-    SET_MODEL(ENT(pev), "models/CharacterScientist.mdl");
+    SET_MODEL(ENT(pev), "models/basekart.mdl");
     g_ulModelIndexPlayer = pev->modelindex;
 	pev->sequence		= LookupActivity( ACT_IDLE );
-
-
-	PRECACHE_MODEL("models/basekart.mdl");
-	pev->weaponmodel = MAKE_STRING("models/basekart.mdl");	//TODO: make character select determine this
+	
+	pev->weaponmodel = MAKE_STRING("models/CharacterScientist.mdl");	//TODO: make character select determine this
 
 	if ( FBitSet(pev->flags, FL_DUCKING) ) 
 		UTIL_SetSize(pev, VEC_DUCK_HULL_MIN, VEC_DUCK_HULL_MAX);

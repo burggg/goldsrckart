@@ -617,9 +617,9 @@ void CL_AdjustAngles ( float frametime, float *viewangles )
 		speed = frametime;
 	}
 
-	viewangles[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_moveright);
-	viewangles[YAW] += speed*cl_yawspeed->value*CL_KeyState(&in_moveleft);
-	viewangles[YAW] = anglemod(viewangles[YAW]);
+	//viewangles[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_moveright);
+	//viewangles[YAW] += speed*cl_yawspeed->value*CL_KeyState(&in_moveleft);
+	//viewangles[YAW] = anglemod(viewangles[YAW]);
 	camYaw -= speed*cl_yawspeed->value*CL_KeyState(&in_right);
 	camYaw += speed*cl_yawspeed->value*CL_KeyState(&in_left);
 	camYaw = anglemod(camYaw);
