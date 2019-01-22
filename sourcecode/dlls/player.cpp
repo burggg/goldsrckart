@@ -1756,23 +1756,26 @@ void CBasePlayer::PreThink(void)
 {
 	//New turning code
 	if (m_afButtonLast & IN_MOVELEFT){
-		anglesYaw += 2 * gpGlobals->frametime;
+		anglesYaw += gpGlobals->frametime * 2;
 	}
 
 	if (m_afButtonLast & IN_MOVERIGHT){
-		anglesYaw -= 2 * gpGlobals->frametime;
+		anglesYaw -= gpGlobals->frametime * 2;
 	}
 
 	if (m_afButtonLast & IN_FORWARD){
-		acceleration += 50 * gpGlobals->frametime;
+		acceleration += 1 * gpGlobals->frametime;
 	}
-	else{
-		acceleration -= pev->friction * gpGlobals->frametime;
+	else if (m_afButtonLast & IN_BACK){
+		acceleration -= 1 * gpGlobals->frametime;
+	}
+	else {
+		acceleration = 0;
 	}
 
 	ALERT(at_console, "Before: %f ", anglesYaw);
-	pev->velocity.x = cos(anglesYaw) * acceleration;
-	pev->velocity.y = sin(anglesYaw) * acceleration;
+	pev->velocity.x += cos(anglesYaw) * acceleration;
+	pev->velocity.y += sin(anglesYaw) * acceleration;
 	
 	ALERT(at_console, "After: %f \n", anglesYaw);
 

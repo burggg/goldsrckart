@@ -1,7 +1,7 @@
-﻿  hl_baseentity.cpp
+﻿  input.cpp
      Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
   Generating code
   Finished generating code
-  hl_cdll.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart-master\sourcecode\projects\vs2013\Release\hl_cdll\client.dll
+  hl_cdll.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\client.dll
           1 file(s) copied.
           1 file(s) copied.

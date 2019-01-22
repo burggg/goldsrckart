@@ -698,8 +698,8 @@ void CL_DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int ac
 
 		if ( !(in_klook.state & 1 ) )
 		{	
-			cmd->forwardmove += cl_forwardspeed->value * CL_KeyState (&in_forward);
-			cmd->forwardmove -= cl_backspeed->value * CL_KeyState (&in_back);
+			//cmd->forwardmove += cl_forwardspeed->value * CL_KeyState (&in_forward);
+			//cmd->forwardmove -= cl_backspeed->value * CL_KeyState (&in_back);
 		}	
 
 		// adjust for speed key
@@ -715,6 +715,7 @@ void CL_DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int ac
 		if ( spd != 0.0 )
 		{
 			// scale the 3 speeds so that the total velocity is not > cl.maxspeed
+			/*
 			float fmov = sqrt((cmd->forwardmove*cmd->forwardmove) + (cmd->sidemove * cmd->sidemove) + (cmd->upmove*cmd->upmove));
 
 			if ( fmov > spd )
@@ -724,6 +725,7 @@ void CL_DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int ac
 				cmd->sidemove *= fratio;
 				cmd->upmove *= fratio;
 			}
+			*/
 		}
 
 		// Allow mice and other controllers to add their inputs
@@ -747,11 +749,11 @@ void CL_DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int ac
 	// Using joystick?
 	if ( in_joystick->value )
 	{
-		if ( cmd->forwardmove > 0 )
+		if (CL_KeyState(&in_forward) > 0)//cmd->forwardmove > 0 )
 		{
 			cmd->buttons |= IN_FORWARD;
 		}
-		else if ( cmd->forwardmove < 0 )
+		else if (CL_KeyState(&in_back) > 0)
 		{
 			cmd->buttons |= IN_BACK;
 		}
