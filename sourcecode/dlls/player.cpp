@@ -1754,30 +1754,33 @@ void CBasePlayer::UpdateStatusBar()
 
 void CBasePlayer::PreThink(void)
 {
-	//New turning code
-	if (m_afButtonLast & IN_MOVELEFT){
-		anglesYaw += gpGlobals->frametime * 2;
-	}
+	pev->controller[0] = (anglesYaw/(2*M_PI)) * 255;
 
-	if (m_afButtonLast & IN_MOVERIGHT){
-		anglesYaw -= gpGlobals->frametime * 2;
-	}
+	if (stunned == STUNNED_NO && FBitSet(pev->flags, FL_ONGROUND)){  //Can't move if we're stunned or in the air
+		//New turning code
+		if (m_afButtonLast & IN_MOVELEFT){
+			anglesYaw += gpGlobals->frametime * 2;
+		}
 
-	if (m_afButtonLast & IN_FORWARD){
-		acceleration += 1 * gpGlobals->frametime;
-	}
-	else if (m_afButtonLast & IN_BACK){
-		acceleration -= 1 * gpGlobals->frametime;
-	}
-	else {
-		acceleration = 0;
-	}
+		if (m_afButtonLast & IN_MOVERIGHT){
+			anglesYaw -= gpGlobals->frametime * 2;
+		}
 
-	ALERT(at_console, "Before: %f ", anglesYaw);
-	pev->velocity.x += cos(anglesYaw) * acceleration;
-	pev->velocity.y += sin(anglesYaw) * acceleration;
-	
-	ALERT(at_console, "After: %f \n", anglesYaw);
+		if (m_afButtonLast & IN_FORWARD){
+			acceleration = -1000;
+		}
+		else if (m_afButtonLast & IN_BACK){
+			acceleration = +1000;
+		}
+		else {
+			acceleration = 0;
+		}
+
+
+		pev->velocity.x += cos(anglesYaw) * acceleration * gpGlobals->frametime;
+		pev->velocity.y += sin(anglesYaw) * acceleration * gpGlobals->frametime;
+
+	}
 
 	int buttonsChanged = (m_afButtonLast ^ pev->button);	// These buttons have changed this frame
 	
