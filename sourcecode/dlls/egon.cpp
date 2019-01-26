@@ -95,6 +95,8 @@ BOOL CEgon::Deploy( void )
 
 int CEgon::AddToPlayer( CBasePlayer *pPlayer )
 {
+	autoAttack = gpGlobals->time + .5;
+
 	if ( CBasePlayerWeapon::AddToPlayer( pPlayer ) )
 	{
 		MESSAGE_BEGIN( MSG_ONE, gmsgWeapPickup, NULL, pPlayer->pev );
@@ -237,7 +239,7 @@ void CEgon::Attack( void )
 	}
 }
 
-void CEgon::PrimaryAttack( void )
+void CEgon::MainAttack()
 {
 	m_fireMode = FIRE_WIDE;
 	Attack();
@@ -492,6 +494,11 @@ void CEgon::DestroyEffect( void )
 
 void CEgon::WeaponIdle( void )
 {
+	if (autoAttack < gpGlobals->time){
+		MainAttack();
+	}
+
+	/*
 	ResetEmptySound( );
 
 	if ( m_flTimeWeaponIdle > gpGlobals->time )
@@ -517,6 +524,7 @@ void CEgon::WeaponIdle( void )
 
 	SendWeaponAnim( iAnim );
 	m_deployed = TRUE;
+	*/
 }
 
 

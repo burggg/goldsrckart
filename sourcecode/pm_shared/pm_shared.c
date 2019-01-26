@@ -2668,11 +2668,11 @@ void PM_PlayerMove ( qboolean server )
 	}
 
 #if !defined( _TFC )
-	// Slow down, I'm pulling it! (a box maybe) but only when I'm standing on ground
-	if ( ( pmove->onground != -1 ) && ( pmove->cmd.buttons & IN_USE) )
-	{
-		VectorScale( pmove->velocity, 0.3, pmove->velocity );
-	}
+	// Slow down, I'm pulling it! (a box maybe) but only when I'm standing on ground (we don't want this for a cart racer)
+	//if ( ( pmove->onground != -1 ) && ( pmove->cmd.buttons & IN_USE) )
+	//{
+	//	VectorScale( pmove->velocity, 0.3, pmove->velocity );
+	//}
 #endif
 
 	// Handle movement

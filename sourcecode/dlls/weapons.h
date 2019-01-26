@@ -817,7 +817,7 @@ public:
 
 	void EndAttack( void );
 	void Attack( void );
-	void PrimaryAttack( void );
+	void MainAttack( void );
 	void WeaponIdle( void );
 
 	float m_flAmmoUseTime;// since we use < 1 point of ammo per update, we subtract ammo on a timer.
@@ -853,6 +853,8 @@ private:
 	EGON_FIREMODE		m_fireMode;
 	float				m_shakeTime;
 	BOOL				m_deployed;
+
+	float				autoAttack;
 
 	unsigned short m_usEgonFire;
 };

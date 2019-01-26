@@ -1786,7 +1786,7 @@ void CBasePlayer::PreThink(void)
 {
 	pev->controller[0] = (anglesYaw/(2*M_PI)) * 255;
 
-	if (stunned == STUNNED_NO && FBitSet(pev->flags, FL_ONGROUND)){  //Can't move if we're stunned or in the air
+	if (stunned == STUNNED_NO ){  //Can't move/turn if we're stunned 
 		//New turning code
 		if (m_afButtonLast & IN_MOVELEFT){
 			anglesYaw += gpGlobals->frametime * 2;
@@ -1796,19 +1796,22 @@ void CBasePlayer::PreThink(void)
 			anglesYaw -= gpGlobals->frametime * 2;
 		}
 
-		if (m_afButtonLast & IN_FORWARD){
-			acceleration = -1000;
-		}
-		else if (m_afButtonLast & IN_BACK){
-			acceleration = +1000;
-		}
-		else {
-			acceleration = 0;
-		}
+		if (FBitSet(pev->flags, FL_ONGROUND)){	//Don't move if we're in the air
+
+			if (m_afButtonLast & IN_FORWARD){
+				acceleration = -1000;
+			}
+			else if (m_afButtonLast & IN_BACK){
+				acceleration = +1000;
+			}
+			else {
+				acceleration = 0;
+			}
 
 
-		pev->velocity.x += cos(anglesYaw) * acceleration * gpGlobals->frametime;
-		pev->velocity.y += sin(anglesYaw) * acceleration * gpGlobals->frametime;
+			pev->velocity.x += cos(anglesYaw) * acceleration * gpGlobals->frametime;
+			pev->velocity.y += sin(anglesYaw) * acceleration * gpGlobals->frametime;
+		}
 
 	}
 
