@@ -326,6 +326,11 @@ public:
 	//vars for new movement system
 	float anglesYaw;
 	float acceleration;
+
+	//Powerups
+	int currentPowerup = 0;
+	float powerupTimer;
+	void clearPowerup();
 };
 
 #define AUTOAIM_2DEGREES  0.0348994967025

@@ -41,6 +41,7 @@
 #define STUNNED_BEGIN	1	//Wait for the countdown to end at the beginning
 #define STUNNED_HIT		2	//Stunned from a hit
 
+#define POWERUPS_NUM	0	//How many powerups are there (starting at 0)
 
 extern DLL_GLOBAL ULONG		g_ulModelIndexPlayer;
 extern DLL_GLOBAL BOOL		g_fGameOver;
@@ -665,11 +666,9 @@ int CBasePlayer :: TakeDamage( entvars_t *pevInflictor, entvars_t *pevAttacker, 
 	return 1;
 }
 
-vec3_t old_angles;
 void CBasePlayer::stun(int type, float duration){
-	pev->iuser4 = 1;
+	//pev->iuser4 = 1;
 	//pev->fixangle = TRUE;
-	old_angles = pev->angles;
 
 	stunned = type;
 
@@ -680,7 +679,7 @@ void CBasePlayer::stun(int type, float duration){
 }
 
 void CBasePlayer::stunThink(){
-	pev->iuser4 = 0;
+	//pev->iuser4 = 0;
 
 	//pev->fixangle = FALSE;
 
@@ -1507,11 +1506,42 @@ void CBasePlayer::StartObserver( Vector vecPosition, Vector vecViewAngle )
 
 void CBasePlayer::PlayerUse ( void )
 {
+	if (powerupTimer != 0 && powerupTimer < gpGlobals->time){
+		//I'm using a powerup and it just ran out
+		powerupTimer = 0;
+		clearPowerup();
+	}
+
+	if (!((pev->button | m_afButtonPressed | m_afButtonReleased) & IN_USE))
+		return;
+
+	if (currentPowerup >= 0){
+		//I have a powerup :)
+
+		GiveNamedItem("weapon_egon");
+
+		ALERT(at_console, "eee %d \n", currentPowerup);
+		switch (currentPowerup){
+			case 0:
+				ALERT(at_console, "aaa\n");
+				
+				break;
+		}
+
+		powerupTimer = gpGlobals->time + 5;
+		currentPowerup = -1;
+		return;
+	}
+
+	//I don't have a powerup :(
+
 	return;
-	//TODO: put code for using powerups here
 }
 
+void CBasePlayer::clearPowerup(){
 
+	RemoveAllItems(false);
+}
 
 void CBasePlayer::Jump()
 {
@@ -2498,11 +2528,6 @@ void CBasePlayer :: UpdatePlayerSound ( void )
 
 void CBasePlayer::PostThink()
 {
-
-	if (stunned == STUNNED_HIT){
-		old_angles.y += 180 * gpGlobals->frametime;	//spin around
-		pev->angles = old_angles;
-	}
 
 	if ( g_fGameOver )
 		goto pt_end;         // intermission or finale
