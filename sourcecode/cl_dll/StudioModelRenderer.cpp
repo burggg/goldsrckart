@@ -1717,11 +1717,11 @@ int CStudioModelRenderer::StudioDrawPlayer( int flags, entity_state_t *pplayer )
 	}
 	else
 	{
-		//m_pCurrentEntity->curstate.controller[0] = 127;
+		m_pCurrentEntity->curstate.controller[0] = 127;
 		m_pCurrentEntity->curstate.controller[1] = 127;
 		m_pCurrentEntity->curstate.controller[2] = 127;
 		m_pCurrentEntity->curstate.controller[3] = 127;
-		//m_pCurrentEntity->latched.prevcontroller[0] = m_pCurrentEntity->curstate.controller[0];
+		m_pCurrentEntity->latched.prevcontroller[0] = m_pCurrentEntity->curstate.controller[0];
 		m_pCurrentEntity->latched.prevcontroller[1] = m_pCurrentEntity->curstate.controller[1];
 		m_pCurrentEntity->latched.prevcontroller[2] = m_pCurrentEntity->curstate.controller[2];
 		m_pCurrentEntity->latched.prevcontroller[3] = m_pCurrentEntity->curstate.controller[3];

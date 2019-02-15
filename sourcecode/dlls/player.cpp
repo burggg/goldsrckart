@@ -670,7 +670,9 @@ void CBasePlayer::stun(int type, float duration){
 	//pev->iuser4 = 1;
 	//pev->fixangle = TRUE;
 
-	stunned = type;
+	//stunned = type;
+
+	EnableControl(false);
 
 	SetThink(&CBasePlayer::stunThink);
 
@@ -684,7 +686,8 @@ void CBasePlayer::stunThink(){
 	//pev->fixangle = FALSE;
 
 	SetThink(NULL);
-	stunned = STUNNED_NO;
+	//stunned = STUNNED_NO
+	EnableControl(true);
 }
 
 //=========================================================
@@ -1784,6 +1787,9 @@ void CBasePlayer::UpdateStatusBar()
 
 void CBasePlayer::PreThink(void)
 {
+
+	//Possible movement code that can be used
+	/*
 	pev->controller[0] = (anglesYaw/(2*M_PI)) * 255;
 
 	if (stunned == STUNNED_NO ){  //Can't move/turn if we're stunned 
@@ -1814,6 +1820,7 @@ void CBasePlayer::PreThink(void)
 		}
 
 	}
+	*/
 
 	int buttonsChanged = (m_afButtonLast ^ pev->button);	// These buttons have changed this frame
 	

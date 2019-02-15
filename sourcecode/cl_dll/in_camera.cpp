@@ -19,6 +19,8 @@
 #include "SDL2/SDL_mouse.h"
 #include "port.h"
 
+extern vec3_t anglesReal;
+
 float CL_KeyState (kbutton_t *key);
 
 extern cl_enginefunc_t gEngfuncs;
@@ -59,7 +61,7 @@ cvar_t	*c_minyaw;
 cvar_t	*c_maxdistance;
 cvar_t	*c_mindistance;
 
-extern float camYaw;
+extern vec3_t viewanglesReal;
 
 // pitch, yaw, dist
 vec3_t cam_ofs;
@@ -369,21 +371,22 @@ void CL_DLLEXPORT CAM_Think( void )
 	// Move towards ideal
 	VectorCopy( cam_ofs, camAngles );
 
-	gEngfuncs.GetViewAngles( (float *)viewangles );
+	viewangles = anglesReal;
+	//gEngfuncs.GetViewAngles( (float *)viewangles );
 
 	if( cam_snapto->value )
 	{
-		camAngles[YAW] = cam_idealyaw->value + camYaw; //+ viewangles[ YAW ];
-		camAngles[ PITCH ] = cam_idealpitch->value + viewangles[ PITCH ];
+		camAngles[YAW] = cam_idealyaw->value + viewanglesReal[YAW]; //+ camYaw[ YAW ];
+		camAngles[PITCH] = cam_idealpitch->value + viewanglesReal[PITCH];
 		camAngles[ 2 ] = cam_idealdist->value;
 	}
 	else
 	{
-		if( camAngles[ YAW ] - camYaw != cam_idealyaw->value )
-			camAngles[ YAW ] = MoveToward( camAngles[ YAW ], cam_idealyaw->value + camYaw, CAM_ANGLE_SPEED );
+		if (camAngles[YAW] - viewanglesReal[YAW] != cam_idealyaw->value)
+			camAngles[YAW] = MoveToward(camAngles[YAW], cam_idealyaw->value + viewanglesReal[YAW], CAM_ANGLE_SPEED);
 
-		if( camAngles[ PITCH ] - viewangles[ PITCH ] != cam_idealpitch->value )
-			camAngles[ PITCH ] = MoveToward( camAngles[ PITCH ], cam_idealpitch->value + viewangles[ PITCH ], CAM_ANGLE_SPEED );
+		if (camAngles[PITCH] - viewanglesReal[PITCH] != cam_idealpitch->value)
+			camAngles[PITCH] = MoveToward(camAngles[PITCH], cam_idealpitch->value + viewanglesReal[PITCH], CAM_ANGLE_SPEED);
 
 		if( abs( camAngles[ 2 ] - cam_idealdist->value ) < 2.0 )
 			camAngles[ 2 ] = cam_idealdist->value;
@@ -438,14 +441,15 @@ void CAM_ToThirdPerson(void)
 #if !defined( _DEBUG )
 #endif
 
-	gEngfuncs.GetViewAngles( (float *)viewangles );
+	viewangles = anglesReal;
+	//gEngfuncs.GetViewAngles( (float *)viewangles );
 
 	if( !cam_thirdperson )
 	{
 		cam_thirdperson = 1; 
 		
-		cam_ofs[ YAW ] = viewangles[ YAW ]; 
-		cam_ofs[ PITCH ] = viewangles[ PITCH ]; 
+		cam_ofs[YAW] = viewanglesReal[YAW];
+		cam_ofs[PITCH] = viewanglesReal[PITCH];
 		cam_ofs[ 2 ] = CAM_MIN_DIST; 
 	}
 
@@ -505,7 +509,8 @@ void CAM_ClearStates( void )
 {
 	vec3_t viewangles;
 
-	gEngfuncs.GetViewAngles( (float *)viewangles );
+	viewangles = anglesReal;
+	//gEngfuncs.GetViewAngles( (float *)viewangles );
 
 	cam_pitchup.state = 0;
 	cam_pitchdown.state = 0;
@@ -525,8 +530,8 @@ void CAM_ClearStates( void )
 	cam_ofs[ 1 ] = 0.0;
 	cam_ofs[ 2 ] = CAM_MIN_DIST;
 
-	cam_idealpitch->value = viewangles[ PITCH ];
-	cam_idealyaw->value = viewangles[ YAW ];
+	cam_idealpitch->value = viewanglesReal[PITCH];
+	cam_idealyaw->value = viewanglesReal[YAW];
 	cam_idealdist->value = CAM_MIN_DIST;
 }
 

@@ -763,14 +763,14 @@ void PM_WalkMove ()
 	pmtrace_t trace;
 	
 	// Copy movement amounts
-	if (pmove->iuser4 == 0){
+	//if (!(pmove->flags & FL_FROZEN)){
 		fmove = pmove->cmd.forwardmove;
 		smove = pmove->cmd.sidemove;
-	}
-	else{		//if the player is stunned, don't let the player move
-		fmove = 0;
-		smove = 0;
-	}
+	//}
+	//else{		//if the player is stunned, don't let the player move
+	//	fmove = 0;
+	//	smove = 0;
+	//}
 	
 	// Zero out z components of movement vectors
 	pmove->forward[2] = 0;
@@ -2511,8 +2511,8 @@ void PM_CheckParamters( void )
 		pmove->cmd.upmove      *= fRatio;
 	}
 
-	if ( pmove->flags & FL_FROZEN ||
-		 pmove->flags & FL_ONTRAIN || 
+	if ( pmove->flags & FL_ONTRAIN || 
+		pmove->flags & FL_FROZEN   ||
 		 pmove->dead )
 	{
 		pmove->cmd.forwardmove = 0;
@@ -2800,14 +2800,16 @@ void PM_PlayerMove ( qboolean server )
 
 			// Are we on ground now
 
-			if (pmove->onground != -1)
-			{
-				PM_WalkMove();
-			}
-			else
-			{
-				PM_AirMove();  // Take into account movement when in air.
-			}
+			//if (!(pmove->flags & FL_FROZEN)){	//Only let the player move if they're not frozen
+				if (pmove->onground != -1)
+				{
+					PM_WalkMove();
+				}
+				else
+				{
+					PM_AirMove();  // Take into account movement when in air.
+				}
+			//}
 
 			// Set final flags.
 			PM_CatagorizePosition();

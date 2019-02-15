@@ -28,6 +28,8 @@
 
 #define MOUSE_BUTTON_COUNT 5
 
+extern vec3_t anglesReal;
+
 // Set this to 1 to show mouse cursor.  Experimental
 int	g_iVisibleMouse = 0;
 
@@ -54,7 +56,7 @@ extern cvar_t *cl_forwardspeed;
 extern cvar_t *cl_pitchspeed;
 extern cvar_t *cl_movespeedkey;
 
-float camYaw;
+vec3_t viewanglesReal;
 
 static double s_flRawInputUpdateTime = 0.0f;
 static bool m_bRawInput = false;
@@ -170,8 +172,9 @@ void Force_CenterView_f (void)
 
 	if (!iMouseInUse)
 	{
-		gEngfuncs.GetViewAngles( (float *)viewangles );
-	    viewangles[PITCH] = 0;
+		viewangles = anglesReal;
+		//gEngfuncs.GetViewAngles( (float *)viewangles );
+		viewanglesReal[PITCH] = 0;
 		gEngfuncs.SetViewAngles( (float *)viewangles );
 	}
 }
@@ -462,7 +465,8 @@ void IN_MouseMove ( float frametime, usercmd_t *cmd)
 	int		mx, my;
 	vec3_t viewangles;
 
-	gEngfuncs.GetViewAngles( (float *)viewangles );
+	viewangles = anglesReal;
+	//gEngfuncs.GetViewAngles( (float *)viewangles );
 
 	if ( in_mlook.state & 1)
 	{
@@ -543,15 +547,15 @@ void IN_MouseMove ( float frametime, usercmd_t *cmd)
 		if ( (in_strafe.state & 1) || (lookstrafe->value && (in_mlook.state & 1) ))
 			cmd->sidemove += m_side->value * mouse_x;
 		else
-			camYaw -= m_yaw->value * mouse_x;
+			viewanglesReal[YAW] -= m_yaw->value * mouse_x;
 
 		if ( (in_mlook.state & 1) && !(in_strafe.state & 1))
 		{
-			viewangles[PITCH] += m_pitch->value * mouse_y;
-			if (viewangles[PITCH] > cl_pitchdown->value)
-				viewangles[PITCH] = cl_pitchdown->value;
-			if (viewangles[PITCH] < -cl_pitchup->value)
-				viewangles[PITCH] = -cl_pitchup->value;
+			viewanglesReal[PITCH] += m_pitch->value * mouse_y;
+			if (viewanglesReal[PITCH] > cl_pitchdown->value)
+				viewanglesReal[PITCH] = cl_pitchdown->value;
+			if (viewanglesReal[PITCH] < -cl_pitchup->value)
+				viewanglesReal[PITCH] = -cl_pitchup->value;
 		}
 		else
 		{
@@ -866,7 +870,8 @@ void IN_JoyMove ( float frametime, usercmd_t *cmd )
 	int		i;
 	vec3_t viewangles;
 
-	gEngfuncs.GetViewAngles( (float *)viewangles );
+	viewangles = anglesReal;
+	//gEngfuncs.GetViewAngles( (float *)viewangles );
 
 
 	// complete initialization if first time in
@@ -933,11 +938,11 @@ void IN_JoyMove ( float frametime, usercmd_t *cmd )
 					// only absolute control support here (joy_advanced is 0)
 					if (m_pitch->value < 0.0)
 					{
-						viewangles[PITCH] -= (fAxisValue * joy_pitchsensitivity->value) * aspeed * cl_pitchspeed->value;
+						viewanglesReal[PITCH] -= (fAxisValue * joy_pitchsensitivity->value) * aspeed * cl_pitchspeed->value;
 					}
 					else
 					{
-						viewangles[PITCH] += (fAxisValue * joy_pitchsensitivity->value) * aspeed * cl_pitchspeed->value;
+						viewanglesReal[PITCH] += (fAxisValue * joy_pitchsensitivity->value) * aspeed * cl_pitchspeed->value;
 					}
 					V_StopPitchDrift();
 				}
@@ -986,11 +991,11 @@ void IN_JoyMove ( float frametime, usercmd_t *cmd )
 				{
 					if(dwControlMap[i] == JOY_ABSOLUTE_AXIS)
 					{
-						viewangles[YAW] += (fAxisValue * joy_yawsensitivity->value) * aspeed * cl_yawspeed->value;
+						viewanglesReal[YAW] += (fAxisValue * joy_yawsensitivity->value) * aspeed * cl_yawspeed->value;
 					}
 					else
 					{
-						viewangles[YAW] += (fAxisValue * joy_yawsensitivity->value) * speed * 180.0;
+						viewanglesReal[YAW] += (fAxisValue * joy_yawsensitivity->value) * speed * 180.0;
 					}
 
 				}
@@ -1005,11 +1010,11 @@ void IN_JoyMove ( float frametime, usercmd_t *cmd )
 					// pitch movement detected and pitch movement desired by user
 					if(dwControlMap[i] == JOY_ABSOLUTE_AXIS)
 					{
-						viewangles[PITCH] += (fAxisValue * joy_pitchsensitivity->value) * aspeed * cl_pitchspeed->value;
+						viewanglesReal[PITCH] += (fAxisValue * joy_pitchsensitivity->value) * aspeed * cl_pitchspeed->value;
 					}
 					else
 					{
-						viewangles[PITCH] += (fAxisValue * joy_pitchsensitivity->value) * speed * 180.0;
+						viewanglesReal[PITCH] += (fAxisValue * joy_pitchsensitivity->value) * speed * 180.0;
 					}
 					V_StopPitchDrift();
 				}
@@ -1033,10 +1038,10 @@ void IN_JoyMove ( float frametime, usercmd_t *cmd )
 	}
 
 	// bounds check pitch
-	if (viewangles[PITCH] > cl_pitchdown->value)
-		viewangles[PITCH] = cl_pitchdown->value;
-	if (viewangles[PITCH] < -cl_pitchup->value)
-		viewangles[PITCH] = -cl_pitchup->value;
+	if (viewanglesReal[PITCH] > cl_pitchdown->value)
+		viewanglesReal[PITCH] = cl_pitchdown->value;
+	if (viewanglesReal[PITCH] < -cl_pitchup->value)
+		viewanglesReal[PITCH] = -cl_pitchup->value;
 
 	gEngfuncs.SetViewAngles( (float *)viewangles );
 }

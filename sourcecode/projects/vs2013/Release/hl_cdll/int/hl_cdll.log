@@ -1,4 +1,7 @@
-﻿  pm_shared.c
+﻿  StudioModelRenderer.cpp
+  in_camera.cpp
+  input.cpp
+  input32.cpp
      Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
   Generating code
   Finished generating code
