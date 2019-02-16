@@ -19,6 +19,10 @@
 #include "SDL2/SDL_mouse.h"
 #include "port.h"
 
+#include "pmtrace.h"
+
+extern vec3_t realOrigin;
+
 extern vec3_t anglesReal;
 
 float CL_KeyState (kbutton_t *key);
@@ -195,9 +199,19 @@ void CL_DLLEXPORT CAM_Think( void )
 	}
 #endif
 
+	//Prevent camera from going out of bounds
+	pmtrace_t * trace;
+	Vector startPos = realOrigin;
+	Vector endPos = Vector(realOrigin.x + (-cos(viewanglesReal[YAW] * (M_PI / 180))) * (cos(viewanglesReal[PITCH] * (M_PI / 180))) * 200, realOrigin.y + (-sin(viewanglesReal[YAW] * (M_PI / 180))) * (cos(viewanglesReal[PITCH] * (M_PI / 180))) * 200, realOrigin.z + (sin(viewanglesReal[PITCH] * (M_PI / 180))) * 200);
+	trace = gEngfuncs.PM_TraceLine(startPos, endPos, 0, 1, -1);
+	Vector traceMod = (trace->endpos - startPos) - ((trace->endpos - startPos).Normalize() * 5);//Subtract a bit so the camera isn't on the wall
+	float traceDist = sqrtf(pow(traceMod.x, 2) + pow(traceMod.y, 2) + pow(traceMod.z, 2));
+	cam_idealdist->value = traceDist;	
+
+	dist = cam_idealdist->value;
+
 	camAngles[ PITCH ] = cam_idealpitch->value;
 	camAngles[ YAW ] = cam_idealyaw->value;
-	dist = cam_idealdist->value;
 	//
 	//movement of the camera with the mouse
 	//

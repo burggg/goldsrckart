@@ -69,6 +69,9 @@ extern cvar_t	*cl_vsmoothing;
 #define	CAM_MODE_RELAX		1
 #define CAM_MODE_FOCUS		2
 
+vec3_t realOrigin;
+
+
 vec3_t		v_origin, v_angles, v_cl_angles, v_sim_org, v_lastAngles;
 float		v_frametime, v_lastDistance;	
 float		v_cameraRelaxAngle	= 5.0f;
@@ -636,6 +639,8 @@ void V_CalcNormalRefdef ( struct ref_params_s *pparams )
 		{
 			pparams->vieworg[ i ] += -ofs[2] * camForward[ i ];
 		}
+
+		realOrigin = ent->origin;
 	}
 	
 	// Give gun our viewangles
