@@ -2961,7 +2961,7 @@ the engine.  The same PM_Move routine is built into the game .dll and the client
 invoked by each side as appropriate.  There should be no distinction, internally, between server
 and client.  This will ensure that prediction behaves appropriately.
 */
-
+float speedGlobal;
 void PM_Move ( struct playermove_s *ppmove, int server )
 {
 	assert( pm_shared_initialized );
@@ -2983,6 +2983,13 @@ void PM_Move ( struct playermove_s *ppmove, int server )
 	if ( !pmove->multiplayer && ( pmove->movetype == MOVETYPE_WALK  ) )
 	{
 		pmove->friction = 0.2f;
+		if (pmove->onground != -1){
+			speedGlobal = (cosf(pmove->angles[YAW] * (M_PI / 180)) * pmove->velocity[0]) + (sinf(pmove->angles[YAW] * (M_PI / 180)) * pmove->velocity[1]);
+
+			if (pmove->cmd.buttons & IN_JUMP){
+				pmove->friction = 0.05f;//player is on ground, coming out of a jump, so start drifting
+			}
+		}
 	}
 }
 

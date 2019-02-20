@@ -26,6 +26,8 @@ extern "C"
 
 vec3_t anglesReal;
 
+extern "C" float speedGlobal;
+
 extern int g_iAlive;
 
 extern int g_weaponselect;
@@ -620,9 +622,11 @@ void CL_AdjustAngles(float frametime, float *viewangles)
 
 
 	
-	anglesReal[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_moveright);
-	anglesReal[YAW] += speed*cl_yawspeed->value*CL_KeyState(&in_moveleft);
+
+	anglesReal[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_moveright) * (speedGlobal / 200);
+	anglesReal[YAW] += speed*cl_yawspeed->value*CL_KeyState(&in_moveleft) * (speedGlobal / 200);
 	anglesReal[YAW] = anglemod(anglesReal[YAW]);
+
 	viewanglesReal[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_right);
 	viewanglesReal[YAW] += speed*cl_yawspeed->value*CL_KeyState(&in_left);
 	viewanglesReal[YAW] = anglemod(viewanglesReal[YAW]);
@@ -679,7 +683,6 @@ void CL_DLLEXPORT CL_CreateMove(float frametime, struct usercmd_s *cmd, int acti
 		//memset( viewangles, 0, sizeof( vec3_t ) );
 		//camYaw[ 0 ] = camYaw[ 1 ] = camYaw[ 2 ] = 0.0;
 		//gEngfuncs.GetViewAngles((float *)viewangles);
-		viewangles = anglesReal;
 
 		CL_AdjustAngles(frametime, viewangles);
 
@@ -733,7 +736,6 @@ void CL_DLLEXPORT CL_CreateMove(float frametime, struct usercmd_s *cmd, int acti
 			}
 
 		}
-
 		// Allow mice and other controllers to add their inputs
 		IN_Move(frametime, cmd);
 	}
@@ -777,6 +779,7 @@ void CL_DLLEXPORT CL_CreateMove(float frametime, struct usercmd_s *cmd, int acti
 	{
 		VectorCopy(oldangles, cmd->viewangles);
 	}
+
 
 	Bench_SetViewAngles(1, (float *)&cmd->viewangles, frametime, cmd);
 }
