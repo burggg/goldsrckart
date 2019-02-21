@@ -2962,6 +2962,7 @@ invoked by each side as appropriate.  There should be no distinction, internally
 and client.  This will ensure that prediction behaves appropriately.
 */
 float speedGlobal;
+int inDrift;
 void PM_Move ( struct playermove_s *ppmove, int server )
 {
 	assert( pm_shared_initialized );
@@ -2985,10 +2986,14 @@ void PM_Move ( struct playermove_s *ppmove, int server )
 		pmove->friction = 0.2f;
 		if (pmove->onground != -1){
 			speedGlobal = (cosf(pmove->angles[YAW] * (M_PI / 180)) * pmove->velocity[0]) + (sinf(pmove->angles[YAW] * (M_PI / 180)) * pmove->velocity[1]);
-
+			inDrift = 0;
 			if (pmove->cmd.buttons & IN_JUMP){
 				pmove->friction = 0.05f;//player is on ground, coming out of a jump, so start drifting
+				inDrift = 1;
 			}
+		}
+		else{
+			inDrift = 2;
 		}
 	}
 }

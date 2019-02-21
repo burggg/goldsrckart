@@ -27,6 +27,8 @@ extern "C"
 vec3_t anglesReal;
 
 extern "C" float speedGlobal;
+extern "C" qboolean inDrift;
+int lastDir;
 
 extern int g_iAlive;
 
@@ -622,9 +624,32 @@ void CL_AdjustAngles(float frametime, float *viewangles)
 
 
 	
+	if (inDrift == 1){
+		switch (lastDir)
+		{
+		case 1:
+			anglesReal[YAW] -= 1;
+			break;
+		case 0:
+			anglesReal[YAW] += 1;
+			break;
+		default:
+			break;
+		}
+	}
+	else{
+		if (inDrift == 0){
+			anglesReal[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_moveright) * (speedGlobal / 200);
+			anglesReal[YAW] += speed*cl_yawspeed->value*CL_KeyState(&in_moveleft) * (speedGlobal / 200);
+		}
 
-	anglesReal[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_moveright) * (speedGlobal / 200);
-	anglesReal[YAW] += speed*cl_yawspeed->value*CL_KeyState(&in_moveleft) * (speedGlobal / 200);
+		if (CL_KeyState(&in_moveright) != 0){
+			lastDir = 1;
+		}
+		else if (CL_KeyState(&in_moveleft) != 0){
+			lastDir = 0;
+		}
+	}
 	anglesReal[YAW] = anglemod(anglesReal[YAW]);
 
 	viewanglesReal[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_right);
