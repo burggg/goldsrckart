@@ -26,6 +26,7 @@ extern "C"
 
 vec3_t anglesReal;
 
+extern "C" float surfAngles[3];
 extern "C" float speedGlobal;
 extern "C" qboolean inDrift;
 int lastDir;
@@ -702,6 +703,8 @@ void CL_DLLEXPORT CL_CreateMove(float frametime, struct usercmd_s *cmd, int acti
 
 	//gEngfuncs.GetViewAngles((float *)viewangles);
 	viewangles = anglesReal;
+	
+
 
 	if (active && !Bench_Active())
 	{

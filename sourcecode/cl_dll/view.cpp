@@ -21,7 +21,6 @@
 #include "hltv.h"
 #include "Exports.h"
 
-
 #ifndef M_PI
 #define M_PI		3.14159265358979323846	// matches value in gcc v2 math.h
 #endif
@@ -29,7 +28,6 @@
 	int CL_IsThirdPerson( void );
 	void CL_CameraOffset( float *ofs );
 
-	void CL_DLLEXPORT V_CalcRefdef( struct ref_params_s *pparams );
 
 	void PM_ParticleLine( float *start, float *end, int pcolor, float life, float vert);
 	int		PM_GetVisEntInfo( int ent );
@@ -54,6 +52,8 @@ extern engine_studio_api_t IEngineStudio;
 
 extern kbutton_t	in_mlook;
 
+extern cl_enginefunc_t gEngfuncs;
+
 /*
 The view is allowed to move slightly from it's true position for bobbing,
 but if it exceeds 8 pixels linear distance (spherical, not box), the list of
@@ -69,8 +69,8 @@ extern cvar_t	*cl_vsmoothing;
 #define	CAM_MODE_RELAX		1
 #define CAM_MODE_FOCUS		2
 
+extern vec3_t anglesReal;
 vec3_t realOrigin;
-
 
 vec3_t		v_origin, v_angles, v_cl_angles, v_sim_org, v_lastAngles;
 float		v_frametime, v_lastDistance;	
@@ -811,11 +811,59 @@ void V_CalcNormalRefdef ( struct ref_params_s *pparams )
 		// Player pitch is inverted
 		pitch /= -3.0;
 
+
+		//Get face normal
+		Vector m_vSurfaceNormal;
+		Vector m_vDirection;
+		Vector m_vDirection2;
+		Vector surfAngles;
+
+		pmtrace_t * tr;
+		tr = gEngfuncs.PM_TraceLine(realOrigin, realOrigin + Vector(0, 0, -100), PM_TRACELINE_PHYSENTSONLY, 2, -1);
+
+		if (tr->fraction != 1){
+			m_vSurfaceNormal = tr->plane.normal;
+		}
+		else if (tr->inwater){
+			m_vSurfaceNormal = Vector(0, 0, 1);
+		}
+
+		if (m_vSurfaceNormal != Vector(0,0,0))
+		{
+			//Convert angles to vector
+			vec3_t vecAnglesReal, vecAnglesRealRight;
+			float anglesRealMod[3] = { anglesReal.x, anglesReal.y, anglesReal.z };
+			AngleVectors(anglesRealMod, vecAnglesReal, vecAnglesRealRight, NULL);
+
+			//Get cross product
+			m_vDirection = CrossProduct(m_vSurfaceNormal, Vector(vecAnglesReal.x, vecAnglesReal.y, vecAnglesReal.z));
+			m_vDirection = CrossProduct(m_vSurfaceNormal, m_vDirection);
+
+			//Get cross product
+			m_vDirection2 = CrossProduct(m_vSurfaceNormal, Vector(vecAnglesRealRight.x, vecAnglesRealRight.y, vecAnglesRealRight.z));
+			m_vDirection2 = CrossProduct(m_vSurfaceNormal, m_vDirection2);
+
+			//Convert from vector to angles
+			Vector angles;
+			//angles.y = atan2(m_vDirection.y, m_vDirection.x) * (180 / M_PI);
+			angles.x = -atan2(m_vDirection.z, sqrt(m_vDirection.x * m_vDirection.x + m_vDirection.y * m_vDirection.y)) * (180 / M_PI);
+			angles.y = atan2(m_vDirection2.z, sqrt(m_vDirection2.x * m_vDirection2.x + m_vDirection2.y * m_vDirection2.y)) * (180 / M_PI);
+
+			gEngfuncs.Con_Printf("%f %f %f \n", angles.x, angles.y, angles.z);
+
+			surfAngles[0] = angles.x; surfAngles[1] = angles.y; surfAngles[2] = angles.z;
+		}
+
 		// Slam local player's pitch value
-		//ent->angles[ 0 ] = pitch;
-		//ent->curstate.angles[ 0 ] = pitch;
-		//ent->prevstate.angles[ 0 ] = pitch;
-		//ent->latched.prevangles[ 0 ] = pitch;
+		ent->angles[0] = surfAngles[PITCH];
+		ent->curstate.angles[0] = surfAngles[PITCH];
+		ent->prevstate.angles[0] = surfAngles[PITCH];
+		ent->latched.prevangles[0] = surfAngles[PITCH];
+
+		ent->angles[2] = surfAngles[YAW];
+		ent->curstate.angles[2] = surfAngles[YAW];
+		ent->prevstate.angles[2] = surfAngles[YAW];
+		ent->latched.prevangles[2] = surfAngles[YAW];
 	}
 
 	// override all previous settings if the viewent isn't the client
