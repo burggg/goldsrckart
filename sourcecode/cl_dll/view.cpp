@@ -32,7 +32,7 @@
 	void PM_ParticleLine( float *start, float *end, int pcolor, float life, float vert);
 	int		PM_GetVisEntInfo( int ent );
 	extern "C" int		PM_GetPhysEntInfo( int ent );
-	void	InterpolateAngles(  float * start, float * end, float * output, float frac );
+	extern "C" void	InterpolateAngles(  float * start, float * end, float * output, float frac );
 	void	NormalizeAngles( float * angles );
 	extern "C" float	Distance(const float * v1, const float * v2);
 	float	AngleBetweenVectors(  const float * v1,  const float * v2 );
@@ -485,6 +485,13 @@ typedef struct
 	int CurrentAngle;
 } viewinterp_t;
 
+
+
+
+float surfAngles[3];
+Vector oldvSurfaceNormal;
+Vector oldSurfAngle;
+float surfAnglesFrac;
 /*
 ==================
 V_CalcRefdef
@@ -816,7 +823,7 @@ void V_CalcNormalRefdef ( struct ref_params_s *pparams )
 		Vector m_vSurfaceNormal;
 		Vector m_vDirection;
 		Vector m_vDirection2;
-		Vector surfAngles;
+		float surfAnglesEnd[3];
 
 		pmtrace_t * tr;
 		tr = gEngfuncs.PM_TraceLine(realOrigin, realOrigin + Vector(0, 0, -100), PM_TRACELINE_PHYSENTSONLY, 2, -1);
@@ -826,6 +833,16 @@ void V_CalcNormalRefdef ( struct ref_params_s *pparams )
 		}
 		else if (tr->inwater){
 			m_vSurfaceNormal = Vector(0, 0, 1);
+		}
+
+
+		if (m_vSurfaceNormal != oldvSurfaceNormal){
+			surfAnglesFrac = 0.0f;
+			oldSurfAngle = surfAngles;
+			oldvSurfaceNormal = m_vSurfaceNormal;
+		}
+		else if (surfAnglesFrac < 1){
+			surfAnglesFrac += pparams->frametime * 4;
 		}
 
 		if (m_vSurfaceNormal != Vector(0,0,0))
@@ -844,26 +861,26 @@ void V_CalcNormalRefdef ( struct ref_params_s *pparams )
 			m_vDirection2 = CrossProduct(m_vSurfaceNormal, m_vDirection2);
 
 			//Convert from vector to angles
-			Vector angles;
-			//angles.y = atan2(m_vDirection.y, m_vDirection.x) * (180 / M_PI);
-			angles.x = -atan2(m_vDirection.z, sqrt(m_vDirection.x * m_vDirection.x + m_vDirection.y * m_vDirection.y)) * (180 / M_PI);
-			angles.y = atan2(m_vDirection2.z, sqrt(m_vDirection2.x * m_vDirection2.x + m_vDirection2.y * m_vDirection2.y)) * (180 / M_PI);
-
-			gEngfuncs.Con_Printf("%f %f %f \n", angles.x, angles.y, angles.z);
-
-			surfAngles[0] = angles.x; surfAngles[1] = angles.y; surfAngles[2] = angles.z;
+			surfAngles[0] = -atan2(m_vDirection.z, sqrt(m_vDirection.x * m_vDirection.x + m_vDirection.y * m_vDirection.y)) * (180 / M_PI);
+			surfAngles[2] = atan2(m_vDirection2.z, sqrt(m_vDirection2.x * m_vDirection2.x + m_vDirection2.y * m_vDirection2.y)) * (180 / M_PI);
+			//gEngfuncs.Con_Printf("%f %f %f \n", surfAngles[0], surfAngles[1], surfAngles[2]);
 		}
 
-		// Slam local player's pitch value
-		ent->angles[0] = surfAngles[PITCH];
-		ent->curstate.angles[0] = surfAngles[PITCH];
-		ent->prevstate.angles[0] = surfAngles[PITCH];
-		ent->latched.prevangles[0] = surfAngles[PITCH];
+		InterpolateAngles(oldSurfAngle, surfAngles, surfAnglesEnd, surfAnglesFrac);
+		gEngfuncs.Con_Printf("%f %f %f \n", surfAnglesEnd[0], surfAnglesEnd[1], surfAnglesEnd[2]);
 
-		ent->angles[2] = surfAngles[YAW];
-		ent->curstate.angles[2] = surfAngles[YAW];
-		ent->prevstate.angles[2] = surfAngles[YAW];
-		ent->latched.prevangles[2] = surfAngles[YAW];
+		// Slam local player's pitch value
+		
+		ent->angles[0] = surfAnglesEnd[PITCH];
+		ent->curstate.angles[0] = surfAnglesEnd[PITCH];
+		ent->prevstate.angles[0] = surfAnglesEnd[PITCH];
+		ent->latched.prevangles[0] = surfAnglesEnd[PITCH];
+
+		ent->angles[2] = surfAnglesEnd[ROLL];
+		ent->curstate.angles[2] = surfAnglesEnd[ROLL];
+		ent->prevstate.angles[2] = surfAnglesEnd[ROLL];
+		ent->latched.prevangles[2] = surfAnglesEnd[YAW];
+		
 	}
 
 	// override all previous settings if the viewent isn't the client

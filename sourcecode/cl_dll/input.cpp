@@ -26,7 +26,6 @@ extern "C"
 
 vec3_t anglesReal;
 
-extern "C" float surfAngles[3];
 extern "C" float speedGlobal;
 extern "C" qboolean inDrift;
 int lastDir;
