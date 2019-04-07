@@ -1476,10 +1476,14 @@ void CStudioModelRenderer::StudioProcessGait( entity_state_t *pplayer )
 	m_pCurrentEntity->latched.prevcontroller[2] = m_pCurrentEntity->curstate.controller[2];
 	m_pCurrentEntity->latched.prevcontroller[3] = m_pCurrentEntity->curstate.controller[3];
 
+
+	//Disabled: we want the angles to update immediately - Sockman
+	/*
 	m_pCurrentEntity->angles[YAW] = m_pPlayerInfo->gaityaw;
 	if (m_pCurrentEntity->angles[YAW] < -0)
 		m_pCurrentEntity->angles[YAW] += 360;
 	m_pCurrentEntity->latched.prevangles[YAW] = m_pCurrentEntity->angles[YAW];
+	*/
 
 	if (pplayer->gaitsequence >=  m_pStudioHeader->numseq) 
 	{

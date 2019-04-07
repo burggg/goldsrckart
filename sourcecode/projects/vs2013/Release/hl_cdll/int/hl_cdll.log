@@ -1,4 +1,4 @@
-﻿  view.cpp
+﻿  StudioModelRenderer.cpp
      Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
   Generating code
   Finished generating code
@@ -38,7 +38,6 @@ message.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'message.obj' 
 saytext.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'saytext.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
 statusbar.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'statusbar.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
 status_icons.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'status_icons.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-StudioModelRenderer.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'StudioModelRenderer.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
 studio_util.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'studio_util.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
 text_message.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'text_message.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
 train.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'train.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
