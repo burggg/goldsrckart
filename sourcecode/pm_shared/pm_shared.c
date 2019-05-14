@@ -736,6 +736,8 @@ void PM_Accelerate (vec3_t wishdir, float wishspeed, float accel)
 	}
 }
 
+float cartVel = 0;
+
 /*
 =====================
 PM_WalkMove
@@ -779,8 +781,16 @@ void PM_WalkMove ()
 	VectorNormalize (pmove->forward);  // Normalize remainder of vectors.
 	VectorNormalize (pmove->right);    // 
 
+	cartVel += fmove/10;
+	if (cartVel > pmove->maxspeed){
+		cartVel = pmove->maxspeed;
+	}
+	else if (cartVel < -pmove->maxspeed){
+		cartVel = -pmove->maxspeed;
+	}
+
 	for (i=0 ; i<2 ; i++)       // Determine x and y parts of velocity
-		wishvel[i] = pmove->forward[i]*fmove + pmove->right[i]*smove;
+		wishvel[i] = pmove->forward[i]*fmove;
 	
 	wishvel[2] = 0;             // Zero out z part of velocity
 
@@ -798,7 +808,11 @@ void PM_WalkMove ()
 
 	// Set pmove velocity
 	pmove->velocity[2] = 0;
-	PM_Accelerate (wishdir, wishspeed, pmove->movevars->accelerate);
+	//PM_Accelerate (wishdir, wishspeed, pmove->movevars->accelerate);
+	//PM_Accelerate(pmove->forward, cartVel, pmove->movevars->accelerate);
+	pmove->velocity[0] = cartVel * pmove->forward[0];
+	pmove->velocity[1] = cartVel * pmove->forward[1];
+
 	pmove->velocity[2] = 0;
 
 	// Add in any base velocity to the current velocity.
@@ -2979,6 +2993,11 @@ void PM_Move ( struct playermove_s *ppmove, int server )
 	{
 		pmove->flags &= ~FL_ONGROUND;
 	}
+
+	if (cartVel > 0)
+		cartVel -= 1;
+	else if (cartVel < 0)
+		cartVel += 1;
 
 	// In single player, reset friction after each movement to FrictionModifier Triggers work still.
 	if ( !pmove->multiplayer && ( pmove->movetype == MOVETYPE_WALK  ) )

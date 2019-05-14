@@ -1,86 +1,110 @@
-﻿  StudioModelRenderer.cpp
-     Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
-  Generating code
-  Finished generating code
-ammo.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'ammo.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-ammohistory.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'ammohistory.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-ammo_secondary.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'ammo_secondary.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-battery.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'battery.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-cdll_int.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'cdll_int.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-com_weapons.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'com_weapons.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-death.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'death.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-demo.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'demo.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-entity.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'entity.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-events.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'events.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-ev_common.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'ev_common.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-ev_hldm.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'ev_hldm.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-flashlight.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'flashlight.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-GameStudioModelRenderer.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'GameStudioModelRenderer.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-geiger.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'geiger.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-health.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'health.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hl_baseentity.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hl_baseentity.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hl_events.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hl_events.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hl_objects.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hl_objects.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hl_weapons.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hl_weapons.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hud.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hud.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hud_bench.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hud_bench.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hud_benchtrace.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hud_benchtrace.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hud_msg.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hud_msg.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hud_redraw.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hud_redraw.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hud_servers.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hud_servers.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hud_spectator.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hud_spectator.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hud_update.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hud_update.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-input32.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'input32.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-interpolation.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'interpolation.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-in_camera.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'in_camera.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-menu.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'menu.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-message.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'message.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-saytext.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'saytext.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-statusbar.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'statusbar.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-status_icons.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'status_icons.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-studio_util.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'studio_util.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-text_message.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'text_message.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-train.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'train.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-tri.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'tri.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-util.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'util.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_ClassMenu.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_ClassMenu.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_ControlConfigPanel.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_ControlConfigPanel.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_CustomObjects.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_CustomObjects.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_int.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_int.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_MOTDWindow.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_MOTDWindow.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_SchemeManager.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_SchemeManager.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_ScorePanel.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_ScorePanel.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_ServerBrowser.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_ServerBrowser.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_SpectatorPanel.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_SpectatorPanel.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_TeamFortressViewport.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_TeamFortressViewport.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_teammenu.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_teammenu.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-voice_status.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'voice_status.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-parsemsg.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'parsemsg.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-crossbow.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'crossbow.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-crowbar.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'crowbar.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-egon.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'egon.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-gauss.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'gauss.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-handgrenade.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'handgrenade.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hornetgun.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hornetgun.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-mp5.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'mp5.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-python.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'python.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-rpg.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'rpg.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-satchel.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'satchel.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-shotgun.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'shotgun.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-squeakgrenade.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'squeakgrenade.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-tripmine.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'tripmine.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-hl_wpn_glock.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hl_wpn_glock.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_checkbutton2.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_checkbutton2.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_grid.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_grid.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_helpers.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_helpers.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_listbox.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_listbox.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_loadtga.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_loadtga.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_scrollbar2.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_scrollbar2.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-vgui_slider2.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'vgui_slider2.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-voice_banmgr.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'voice_banmgr.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-pm_debug.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'pm_debug.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-pm_math.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'pm_math.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-interface.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'interface.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
-  hl_cdll.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\client.dll
-          1 file(s) copied.
-          1 file(s) copied.
+﻿Build started 5/13/2019 9:09:52 PM.
+     1>Project "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\hl_cdll.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\..\dlls /I..\..\cl_dll /I..\..\public /I..\..\common /I..\..\pm_shared /I..\..\engine /I..\..\utils\vgui\include /I..\..\game_shared /I..\..\external /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D CLIENT_DLL /D CLIENT_WEAPONS /D HL_DLL /D _WINDLL /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Release\hl_cdll\int\\" /Fd"Release\hl_cdll\int\vc120.pdb" /Gd /TC /wd4005 /wd4018 /wd4091 /wd4258 /wd4346 /wd4838 /wd4996 /analyze- /errorReport:prompt ..\..\pm_shared\pm_shared.c
+         pm_shared.c
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Release\hl_cdll\client.dll" /INCREMENTAL:NO /NOLOGO ..\..\utils\vgui\lib\win32_vc6\vgui.lib wsock32.lib ..\..\lib\public\sdl2.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"Release\hl_cdll\client.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Release\hl_cdll\client.lib" /MACHINE:X86 /SAFESEH /DLL Release\hl_cdll\int\ammo.obj
+         Release\hl_cdll\int\ammohistory.obj
+         Release\hl_cdll\int\ammo_secondary.obj
+         Release\hl_cdll\int\battery.obj
+         Release\hl_cdll\int\cdll_int.obj
+         Release\hl_cdll\int\com_weapons.obj
+         Release\hl_cdll\int\death.obj
+         Release\hl_cdll\int\demo.obj
+         Release\hl_cdll\int\entity.obj
+         Release\hl_cdll\int\events.obj
+         Release\hl_cdll\int\ev_common.obj
+         Release\hl_cdll\int\ev_hldm.obj
+         Release\hl_cdll\int\flashlight.obj
+         Release\hl_cdll\int\GameStudioModelRenderer.obj
+         Release\hl_cdll\int\geiger.obj
+         Release\hl_cdll\int\health.obj
+         Release\hl_cdll\int\hl_baseentity.obj
+         Release\hl_cdll\int\hl_events.obj
+         Release\hl_cdll\int\hl_objects.obj
+         Release\hl_cdll\int\hl_weapons.obj
+         Release\hl_cdll\int\hud.obj
+         Release\hl_cdll\int\hud_bench.obj
+         Release\hl_cdll\int\hud_benchtrace.obj
+         Release\hl_cdll\int\hud_msg.obj
+         Release\hl_cdll\int\hud_redraw.obj
+         Release\hl_cdll\int\hud_servers.obj
+         Release\hl_cdll\int\hud_spectator.obj
+         Release\hl_cdll\int\hud_update.obj
+         Release\hl_cdll\int\input.obj
+         Release\hl_cdll\int\input32.obj
+         Release\hl_cdll\int\interpolation.obj
+         Release\hl_cdll\int\in_camera.obj
+         Release\hl_cdll\int\menu.obj
+         Release\hl_cdll\int\message.obj
+         Release\hl_cdll\int\saytext.obj
+         Release\hl_cdll\int\statusbar.obj
+         Release\hl_cdll\int\status_icons.obj
+         Release\hl_cdll\int\StudioModelRenderer.obj
+         Release\hl_cdll\int\studio_util.obj
+         Release\hl_cdll\int\text_message.obj
+         Release\hl_cdll\int\train.obj
+         Release\hl_cdll\int\tri.obj
+         Release\hl_cdll\int\util.obj
+         Release\hl_cdll\int\vgui_ClassMenu.obj
+         Release\hl_cdll\int\vgui_ControlConfigPanel.obj
+         Release\hl_cdll\int\vgui_CustomObjects.obj
+         Release\hl_cdll\int\vgui_int.obj
+         Release\hl_cdll\int\vgui_MOTDWindow.obj
+         Release\hl_cdll\int\vgui_SchemeManager.obj
+         Release\hl_cdll\int\vgui_ScorePanel.obj
+         Release\hl_cdll\int\vgui_ServerBrowser.obj
+         Release\hl_cdll\int\vgui_SpectatorPanel.obj
+         Release\hl_cdll\int\vgui_TeamFortressViewport.obj
+         Release\hl_cdll\int\vgui_teammenu.obj
+         Release\hl_cdll\int\view.obj
+         Release\hl_cdll\int\voice_status.obj
+         Release\hl_cdll\int\parsemsg.obj
+         Release\hl_cdll\int\crossbow.obj
+         Release\hl_cdll\int\crowbar.obj
+         Release\hl_cdll\int\egon.obj
+         Release\hl_cdll\int\gauss.obj
+         Release\hl_cdll\int\handgrenade.obj
+         Release\hl_cdll\int\hornetgun.obj
+         Release\hl_cdll\int\mp5.obj
+         Release\hl_cdll\int\python.obj
+         Release\hl_cdll\int\rpg.obj
+         Release\hl_cdll\int\satchel.obj
+         Release\hl_cdll\int\shotgun.obj
+         Release\hl_cdll\int\squeakgrenade.obj
+         Release\hl_cdll\int\tripmine.obj
+         Release\hl_cdll\int\hl_wpn_glock.obj
+         Release\hl_cdll\int\vgui_checkbutton2.obj
+         Release\hl_cdll\int\vgui_grid.obj
+         Release\hl_cdll\int\vgui_helpers.obj
+         Release\hl_cdll\int\vgui_listbox.obj
+         Release\hl_cdll\int\vgui_loadtga.obj
+         Release\hl_cdll\int\vgui_scrollbar2.obj
+         Release\hl_cdll\int\vgui_slider2.obj
+         Release\hl_cdll\int\voice_banmgr.obj
+         Release\hl_cdll\int\pm_debug.obj
+         Release\hl_cdll\int\pm_math.obj
+         Release\hl_cdll\int\pm_shared.obj
+         Release\hl_cdll\int\interface.obj
+         ..\..\lib\public\game_controls.lib
+            Creating library Release\hl_cdll\client.lib and object Release\hl_cdll\client.exp
+         Generating code
+         Finished generating code
+     1>hud_benchtrace.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'hud_benchtrace.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
+     1>voice_banmgr.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'voice_banmgr.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
+     1>pm_math.obj : warning LNK4099: PDB 'vc120.pdb' was not found with 'pm_math.obj' or at 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\vc120.pdb'; linking object as if no debug info
+         hl_cdll.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\client.dll
+       PostBuildEvent:
+         if not exist "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\hl2classic\cl_dlls" mkdir "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\hl2classic\cl_dlls"
+         copy "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\client.dll" "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\hl2classic\cl_dlls\client.dll"
+         copy "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\Release\hl_cdll\\client.pdb" "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\hl2classic\cl_dlls\client.pdb"
+         
+         :VCEnd
+                 1 file(s) copied.
+                 1 file(s) copied.
+     1>Done Building Project "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\hl_cdll.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:12.52
