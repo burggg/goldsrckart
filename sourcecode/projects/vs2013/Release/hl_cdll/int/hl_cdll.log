@@ -1,8 +1,8 @@
-﻿Build started 5/13/2019 9:09:52 PM.
+﻿Build started 6/20/2019 11:49:57 AM.
      1>Project "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\hl_cdll.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\..\dlls /I..\..\cl_dll /I..\..\public /I..\..\common /I..\..\pm_shared /I..\..\engine /I..\..\utils\vgui\include /I..\..\game_shared /I..\..\external /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D CLIENT_DLL /D CLIENT_WEAPONS /D HL_DLL /D _WINDLL /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Release\hl_cdll\int\\" /Fd"Release\hl_cdll\int\vc120.pdb" /Gd /TC /wd4005 /wd4018 /wd4091 /wd4258 /wd4346 /wd4838 /wd4996 /analyze- /errorReport:prompt ..\..\pm_shared\pm_shared.c
-         pm_shared.c
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\..\dlls /I..\..\cl_dll /I..\..\public /I..\..\common /I..\..\pm_shared /I..\..\engine /I..\..\utils\vgui\include /I..\..\game_shared /I..\..\external /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D CLIENT_DLL /D CLIENT_WEAPONS /D HL_DLL /D _WINDLL /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Release\hl_cdll\int\\" /Fd"Release\hl_cdll\int\vc120.pdb" /Gd /TP /wd4005 /wd4018 /wd4091 /wd4258 /wd4346 /wd4838 /wd4996 /analyze- /errorReport:prompt ..\..\cl_dll\input.cpp
+         input.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Release\hl_cdll\client.dll" /INCREMENTAL:NO /NOLOGO ..\..\utils\vgui\lib\win32_vc6\vgui.lib wsock32.lib ..\..\lib\public\sdl2.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"Release\hl_cdll\client.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Release\hl_cdll\client.lib" /MACHINE:X86 /SAFESEH /DLL Release\hl_cdll\int\ammo.obj
          Release\hl_cdll\int\ammohistory.obj
@@ -107,4 +107,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:12.52
+Time Elapsed 00:00:04.91

@@ -1,4 +1,4 @@
-﻿Build started 5/13/2019 9:09:52 PM.
+﻿Build started 6/20/2019 11:34:06 AM.
      1>Project "C:\Program Files (x86)\Steam\steamapps\common\Half-Life\goldsrckart\sourcecode\projects\vs2013\hldll.vcxproj" on node 3 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\..\dlls /I..\..\engine /I..\..\common /I..\..\pm_shared /I..\..\game_shared /I..\..\public /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D QUIVER /D VOXEL /D QUAKE2 /D VALVE_DLL /D CLIENT_WEAPONS /D _WINDLL /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Release\hldll\int\\" /Fd"Release\hldll\int\vc120.pdb" /Gd /TC /wd4005 /wd4018 /wd4091 /wd4258 /wd4346 /wd4838 /wd4996 /analyze- /errorReport:prompt ..\..\pm_shared\pm_shared.c
@@ -122,4 +122,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:13.37
+Time Elapsed 00:00:09.90

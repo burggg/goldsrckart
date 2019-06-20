@@ -622,32 +622,25 @@ void CL_AdjustAngles(float frametime, float *viewangles)
 		speed = frametime;
 	}
 
+	float totalDriftAmount = CL_KeyState(&in_moveright) + CL_KeyState(&in_moveleft);
 
-	
-	if (inDrift == 1){
-		switch (lastDir)
-		{
-		case 1:
-			anglesReal[YAW] -= 1;
-			break;
-		case 0:
-			anglesReal[YAW] += 1;
-			break;
-		default:
-			break;
-		}
+	if (inDrift == 2){
+		anglesReal[YAW] += lastDir * 2;
 	}
-	else{
+	else if (inDrift == 1){
+		anglesReal[YAW] += lastDir;
+	}
+	else {
 		if (inDrift == 0){
 			anglesReal[YAW] -= speed*cl_yawspeed->value*CL_KeyState(&in_moveright) * (speedGlobal / 400);
 			anglesReal[YAW] += speed*cl_yawspeed->value*CL_KeyState(&in_moveleft) * (speedGlobal / 400);
 		}
 
 		if (CL_KeyState(&in_moveright) != 0){
-			lastDir = 1;
+			lastDir = -1;
 		}
 		else if (CL_KeyState(&in_moveleft) != 0){
-			lastDir = 0;
+			lastDir = 1;
 		}
 	}
 	anglesReal[YAW] = anglemod(anglesReal[YAW]);

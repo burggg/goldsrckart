@@ -745,17 +745,17 @@ PM_WalkMove
 Only used by players.  Moves along the ground when player is a MOVETYPE_WALK.
 ======================
 */
+
+vec3_t lastForward;
+int inDrift;
+
 void PM_WalkMove ()
 {
 	int			clip;
 	int			oldonground;
-	int i;
 
-	vec3_t		wishvel;
 	float       spd;
 	float		fmove, smove;
-	vec3_t		wishdir;
-	float		wishspeed;
 
 	vec3_t dest, start;
 	vec3_t original, originalvel;
@@ -764,24 +764,13 @@ void PM_WalkMove ()
 
 	pmtrace_t trace;
 	
-	// Copy movement amounts
-	//if (!(pmove->flags & FL_FROZEN)){
-		fmove = pmove->cmd.forwardmove;
-		smove = pmove->cmd.sidemove;
-	//}
-	//else{		//if the player is stunned, don't let the player move
-	//	fmove = 0;
-	//	smove = 0;
-	//}
-	
-	// Zero out z components of movement vectors
-	pmove->forward[2] = 0;
-	pmove->right[2]   = 0;
-	
-	VectorNormalize (pmove->forward);  // Normalize remainder of vectors.
-	VectorNormalize (pmove->right);    // 
+	fmove = pmove->cmd.forwardmove;
+	smove = pmove->cmd.sidemove;
 
-	cartVel += fmove/10;
+//
+// Clamp to server defined max speed
+//
+	cartVel += fmove / 10;
 	if (cartVel > pmove->maxspeed){
 		cartVel = pmove->maxspeed;
 	}
@@ -789,29 +778,19 @@ void PM_WalkMove ()
 		cartVel = -pmove->maxspeed;
 	}
 
-	for (i=0 ; i<2 ; i++)       // Determine x and y parts of velocity
-		wishvel[i] = pmove->forward[i]*fmove;
-	
-	wishvel[2] = 0;             // Zero out z part of velocity
-
-	VectorCopy (wishvel, wishdir);   // Determine maginitude of speed of move
-	wishspeed = VectorNormalize(wishdir);
-
-//
-// Clamp to server defined max speed
-//
-	if (wishspeed > pmove->maxspeed)
-	{
-		VectorScale (wishvel, pmove->maxspeed/wishspeed, wishvel);
-		wishspeed = pmove->maxspeed;
-	}
-
 	// Set pmove velocity
 	pmove->velocity[2] = 0;
 	//PM_Accelerate (wishdir, wishspeed, pmove->movevars->accelerate);
 	//PM_Accelerate(pmove->forward, cartVel, pmove->movevars->accelerate);
-	pmove->velocity[0] = cartVel * pmove->forward[0];
-	pmove->velocity[1] = cartVel * pmove->forward[1];
+
+	if (inDrift == 0){
+		pmove->velocity[0] = cartVel * pmove->forward[0];
+		pmove->velocity[1] = cartVel * pmove->forward[1];
+	}
+	else{
+		pmove->velocity[0] = cartVel * lastForward[0];
+		pmove->velocity[1] = cartVel * lastForward[1];
+	}
 
 	pmove->velocity[2] = 0;
 
@@ -2976,7 +2955,6 @@ invoked by each side as appropriate.  There should be no distinction, internally
 and client.  This will ensure that prediction behaves appropriately.
 */
 float speedGlobal;
-int inDrift;
 void PM_Move ( struct playermove_s *ppmove, int server )
 {
 	assert( pm_shared_initialized );
@@ -3009,6 +2987,10 @@ void PM_Move ( struct playermove_s *ppmove, int server )
 			if (pmove->cmd.buttons & IN_JUMP){
 				pmove->friction = 0.05f;//player is on ground, coming out of a jump, so start drifting
 				inDrift = 1;
+			}
+			else{
+				lastForward[0] = pmove->forward[0];
+				lastForward[1] = pmove->forward[1];
 			}
 		}
 		else{
